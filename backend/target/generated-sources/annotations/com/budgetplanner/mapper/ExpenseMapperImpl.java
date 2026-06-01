@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-06-01T12:56:28+0530",
-    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.46.0.v20260528-0407, environment: Java 21.0.11 (Eclipse Adoptium)"
+    date = "2026-06-01T13:18:10+0530",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.12 (Oracle Corporation)"
 )
 @Component
 public class ExpenseMapperImpl implements ExpenseMapper {
@@ -24,14 +24,14 @@ public class ExpenseMapperImpl implements ExpenseMapper {
 
         Expense.ExpenseBuilder expense = Expense.builder();
 
-        expense.amount( request.getAmount() );
         expense.category( request.getCategory() );
-        expense.date( request.getDate() );
         expense.description( request.getDescription() );
-        expense.frequency( request.getFrequency() );
+        expense.amount( request.getAmount() );
+        expense.date( request.getDate() );
         if ( request.getRecurring() != null ) {
             expense.recurring( request.getRecurring() );
         }
+        expense.frequency( request.getFrequency() );
 
         return expense.build();
     }
@@ -44,14 +44,14 @@ public class ExpenseMapperImpl implements ExpenseMapper {
 
         ExpenseResponse.ExpenseResponseBuilder expenseResponse = ExpenseResponse.builder();
 
-        expenseResponse.amount( expense.getAmount() );
-        expenseResponse.category( expense.getCategory() );
-        expenseResponse.createdAt( expense.getCreatedAt() );
-        expenseResponse.date( expense.getDate() );
-        expenseResponse.description( expense.getDescription() );
-        expenseResponse.frequency( expense.getFrequency() );
         expenseResponse.id( expense.getId() );
+        expenseResponse.category( expense.getCategory() );
+        expenseResponse.description( expense.getDescription() );
+        expenseResponse.amount( expense.getAmount() );
+        expenseResponse.date( expense.getDate() );
         expenseResponse.recurring( expense.isRecurring() );
+        expenseResponse.frequency( expense.getFrequency() );
+        expenseResponse.createdAt( expense.getCreatedAt() );
         expenseResponse.updatedAt( expense.getUpdatedAt() );
 
         return expenseResponse.build();
@@ -77,23 +77,23 @@ public class ExpenseMapperImpl implements ExpenseMapper {
             return;
         }
 
-        if ( request.getAmount() != null ) {
-            expense.setAmount( request.getAmount() );
-        }
         if ( request.getCategory() != null ) {
             expense.setCategory( request.getCategory() );
-        }
-        if ( request.getDate() != null ) {
-            expense.setDate( request.getDate() );
         }
         if ( request.getDescription() != null ) {
             expense.setDescription( request.getDescription() );
         }
-        if ( request.getFrequency() != null ) {
-            expense.setFrequency( request.getFrequency() );
+        if ( request.getAmount() != null ) {
+            expense.setAmount( request.getAmount() );
+        }
+        if ( request.getDate() != null ) {
+            expense.setDate( request.getDate() );
         }
         if ( request.getRecurring() != null ) {
             expense.setRecurring( request.getRecurring() );
+        }
+        if ( request.getFrequency() != null ) {
+            expense.setFrequency( request.getFrequency() );
         }
     }
 }

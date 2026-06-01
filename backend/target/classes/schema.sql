@@ -4,7 +4,7 @@
 -- Run this manually OR let Hibernate auto-create via ddl-auto=update
 
 
-USE budget_planner_db;
+-- USE budget_planner_db;
 
 -- ── USERS ─────────────────────────────────────────────────────────────────────
 CREATE TABLE IF NOT EXISTS users (
