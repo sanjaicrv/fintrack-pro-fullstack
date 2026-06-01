@@ -41,7 +41,7 @@ export default function Sidebar({ open, onClose }: Props) {
             <div className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
               <Wallet size={16} className="text-white" />
             </div>
-            <span className="font-bold text-gray-900 dark:text-white text-sm">BudgetPlanner</span>
+            <span className="font-bold text-gray-900 dark:text-white text-sm">Fintrack-Pro</span>
           </div>
           <button
             onClick={onClose}

@@ -34,7 +34,7 @@ export default function LoginPage() {
             <Wallet size={24} className="text-white" />
           </div>
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Welcome back</h1>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Sign in to your Budget Planner</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Sign in to your fintrack-pro</p>
         </div>
 
         {/* Card */}
