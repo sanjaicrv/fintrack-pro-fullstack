@@ -3,7 +3,7 @@ import {
   LayoutDashboard, TrendingUp, TrendingDown, Target,
   BarChart2, Settings, X, Wallet
 } from 'lucide-react'
-
+import FinTrackLogo from '../../pages/FinTrackLogo'
 const links = [
   { to: '/',          icon: LayoutDashboard, label: 'Dashboard'  },
   { to: '/income',    icon: TrendingUp,      label: 'Income'     },
@@ -35,20 +35,19 @@ export default function Sidebar({ open, onClose }: Props) {
         ${open ? 'translate-x-0' : '-translate-x-full'}
         lg:translate-x-0 lg:static lg:z-auto
       `}>
+              
         {/* Logo */}
         <div className="flex items-center justify-between px-6 h-16 border-b border-gray-100 dark:border-gray-800">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
-              <Wallet size={16} className="text-white" />
-            </div>
-            <span className="font-bold text-gray-900 dark:text-white text-sm">Fintrack-Pro</span>
-          </div>
+
+          <FinTrackLogo size="md" />
+
           <button
             onClick={onClose}
             className="p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 lg:hidden"
           >
             <X size={16} className="text-gray-500" />
           </button>
+
         </div>
 
         {/* Nav links */}

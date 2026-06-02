@@ -72,13 +72,3 @@ export default function FinTrackLogo({
   );
 }
 
-// ─── Usage example (paste into your sidebar) ─────────────────────────────
-//
-// import FinTrackLogo from "@/components/FinTrackLogo";
-//
-// // In your sidebar component:
-// <div className="px-4 py-5 border-b border-white/5">
-//   <FinTrackLogo collapsed={sidebarCollapsed} />
-// </div>
-//
-// ─────────────────────────────────────────────────────────────────────────
