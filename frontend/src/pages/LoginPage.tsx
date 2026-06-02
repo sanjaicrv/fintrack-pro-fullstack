@@ -100,7 +100,7 @@ export default function LoginPage() {
             </span>
           </h2>
           <p className="text-violet-200/70 text-base leading-relaxed mb-10">
-            Join 50,000+ users managing their money smarter with FinTrack Pro.
+            Join 50+ users managing their money smarter with FinTrack Pro.
           </p>
 
           {/* Benefits list */}
@@ -126,8 +126,8 @@ export default function LoginPage() {
           {/* Stat badges */}
           <div className="grid grid-cols-2 gap-3">
             {[
-              { value: '50K+',   label: 'Active Users' },
-              { value: '₹10Cr+', label: 'Tracked' },
+              { value: '50+',   label: 'Active Users' },
+              { value: '₹100+', label: 'Tracked' },
               { value: '99.9%',  label: 'Uptime' },
               { value: '4.9★',   label: 'Rating' },
             ].map((s, i) => (
@@ -156,7 +156,7 @@ export default function LoginPage() {
             <div className="w-6 h-6 rounded-full bg-gradient-to-br from-violet-400 to-indigo-400 flex items-center justify-center text-white text-xs font-bold">
               P
             </div>
-            <span className="text-violet-300/70 text-xs">Priya Sharma · Software Engineer, Bangalore</span>
+            <span className="text-violet-300/70 text-xs">Swetha S · Software Engineer, Bangalore</span>
           </div>
         </div>
       </div>

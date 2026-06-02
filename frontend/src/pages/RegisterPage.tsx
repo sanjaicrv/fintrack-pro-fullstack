@@ -46,10 +46,10 @@ function GoogleIcon() {
 
 // ── Feature list for left panel ────────────────────────────────────────────
 const features = [
-  { icon: Zap,         text: 'Free plan — no credit card required' },
+  { icon: Zap,         text: 'Free for all' },
   { icon: TrendingUp,  text: 'Set up in under 2 minutes' },
-  { icon: Sparkles,    text: 'Unlimited transactions on Pro' },
-  { icon: BarChart3,   text: 'Smart AI-powered insights' },
+  { icon: Sparkles,    text: 'Unlimited transactions can be tracked' },
+  { icon: BarChart3,   text: 'Goal tracking is also available' },
   { icon: ShieldCheck, text: 'Secure & private by design' },
 ]
 
