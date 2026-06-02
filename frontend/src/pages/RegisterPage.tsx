@@ -90,7 +90,7 @@ export default function RegisterPage() {
         email:     data.email,
         password:  data.password,
       })
-      navigate('/')
+      navigate('/dashboard')
     } catch (err: any) {
       const msg = err?.response?.data?.message || 'Registration failed'
       setError('email', { message: msg })

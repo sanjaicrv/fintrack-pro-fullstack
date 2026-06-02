@@ -44,7 +44,7 @@ export default function LoginPage() {
     setLoading(true)
     try {
       await login(data)
-      navigate('/')
+      navigate('/dashboard')
     } catch (err: any) {
       const msg = err?.response?.data?.message || 'Invalid email or password'
       setError('email', { message: msg })
