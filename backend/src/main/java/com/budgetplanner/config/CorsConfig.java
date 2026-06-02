@@ -17,11 +17,12 @@ public class CorsConfig {
 
         // ── Allowed Origins ─────────────────────────────────────────────────
         // Update these when deploying to production
-        configuration.setAllowedOrigins(List.of(
-                "http://localhost:5173",   // Vite dev server (default)
-                "http://localhost:3000",   // Alternative local port
-                "http://localhost:4173"    // Vite preview
-        ));
+    configuration.setAllowedOrigins(List.of(
+    "http://localhost:5173",
+    "http://localhost:3000",
+    "http://localhost:4173",
+    "https://fintrack-pro-fullstack.vercel.app"
+));
 
         // ── Allowed HTTP Methods ────────────────────────────────────────────
         configuration.setAllowedMethods(List.of(
