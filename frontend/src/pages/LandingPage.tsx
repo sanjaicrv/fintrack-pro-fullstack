@@ -46,7 +46,7 @@ function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const links = ["Home", "Features", "Pricing", "Testimonials", "Contact"];
+  const links = ["Home", "Features", "Pricing", "Testimonials"];
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "bg-[#0a0a1a]/90 backdrop-blur-xl border-b border-violet-500/10 shadow-lg shadow-violet-900/10" : "bg-transparent"}`}>
@@ -126,7 +126,7 @@ function Hero() {
         {/* Badge */}
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-violet-500/30 bg-violet-500/10 text-violet-300 text-xs font-semibold mb-8 backdrop-blur-sm">
           <Zap size={11} className="fill-current" />
-          Trusted by 50,000+ Users Worldwide
+          Trusted by 50+ Users 
           <Zap size={11} className="fill-current" />
         </div>
 
@@ -245,8 +245,8 @@ function Stats() {
   const rating = useCounter(49, 2000, visible);
 
   const stats = [
-    { value: `${users}K+`, label: "Active Users", icon: Users, color: "from-violet-500 to-purple-600" },
-    { value: `₹${expenses}Cr+`, label: "Expenses Tracked", icon: Activity, color: "from-indigo-500 to-blue-600" },
+    { value: `${users} hundreds+`, label: "Active Users", icon: Users, color: "from-violet-500 to-purple-600" },
+    { value: `₹${expenses}k+`, label: "Expenses Tracked", icon: Activity, color: "from-indigo-500 to-blue-600" },
     { value: `${(uptime / 10).toFixed(1)}%`, label: "Uptime Guaranteed", icon: Shield, color: "from-emerald-500 to-teal-600" },
     { value: `${(rating / 10).toFixed(1)}★`, label: "User Rating", icon: Award, color: "from-amber-500 to-orange-600" },
   ];
@@ -274,7 +274,6 @@ function Stats() {
 // ─── Features ──────────────────────────────────────────────────────────────
 function Features() {
   const features = [
-    { icon: PieChart, title: "Budget Planning", desc: "Create smart budgets with AI-powered recommendations tailored to your spending patterns and goals.", color: "from-violet-500 to-purple-600", glow: "violet" },
     { icon: Activity, title: "Expense Tracking", desc: "Automatically categorize and track every expense in real-time with beautiful visual breakdowns.", color: "from-indigo-500 to-blue-600", glow: "indigo" },
     { icon: Target, title: "Goal Management", desc: "Set, track, and achieve financial goals with milestone tracking and progress celebrations.", color: "from-emerald-500 to-teal-600", glow: "emerald" },
     { icon: BarChart3, title: "Financial Analytics", desc: "Deep insights and trend analysis with interactive charts that make data easy to understand.", color: "from-amber-500 to-orange-600", glow: "amber" },
@@ -320,18 +319,18 @@ function Features() {
 // ─── Testimonials ──────────────────────────────────────────────────────────
 function Testimonials() {
   const testimonials = [
+      {
+      name: "Sania S", role: "Influencer, Coimbatore",
+      avatar: "RM", rating: 5, color: "from-indigo-500 to-blue-600",
+      text: "As a Influencer, tracking Collabs and personal finances used to be a nightmare. FinTrack Pro made it effortless. The goal tracking feature is a game-changer."
+    },
     {
-      name: "Priya Sharma", role: "Software Engineer, Bangalore",
+      name: "Swetha", role: "Software Engineer, Bangalore",
       avatar: "PS", rating: 5, color: "from-violet-500 to-purple-600",
       text: "FinTrack Pro completely transformed how I manage money. The analytics are incredible — I saved ₹2 lakhs in just 6 months by following the insights!"
     },
     {
-      name: "Rahul Mehta", role: "Startup Founder, Mumbai",
-      avatar: "RM", rating: 5, color: "from-indigo-500 to-blue-600",
-      text: "As a founder, tracking business and personal finances used to be a nightmare. FinTrack Pro made it effortless. The goal tracking feature is a game-changer."
-    },
-    {
-      name: "Ananya Reddy", role: "Data Scientist, Hyderabad",
+      name: "Reventh A", role: "Data Scientist, Coimbatore",
       avatar: "AR", rating: 5, color: "from-emerald-500 to-teal-600",
       text: "The financial analytics are at a whole different level. Beautiful charts, smart categorization, and the interface is so clean. Absolutely love it!"
     }
@@ -342,7 +341,7 @@ function Testimonials() {
       <div className="relative max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-violet-500/30 bg-violet-500/10 text-violet-300 text-xs font-semibold mb-5">
-            <Star size={11} className="fill-current" /> Loved by Thousands
+            <Star size={11} className="fill-current" /> Loved by Hundereds of Users
           </div>
           <h2 className="text-4xl md:text-6xl font-black text-white mb-5 tracking-tight">
             What Our Users
@@ -381,18 +380,8 @@ function Pricing() {
   const plans = [
     {
       name: "Starter", price: "Free", period: "forever",
-      features: ["Up to 50 transactions/month", "Basic analytics", "2 savings goals", "Email support"],
+      features: ["Unlimited transactions ", " Expense & income tracking", "Smart analytics dashboard", "Savings goals management","Monthly financial insights","Secure cloud access"],
       cta: "Get Started", highlight: false, color: "border-white/10"
-    },
-    {
-      name: "Pro", price: "₹299", period: "/month",
-      features: ["Unlimited transactions", "Advanced analytics", "Unlimited goals", "Priority support", "Export reports", "Custom categories"],
-      cta: "Start Free Trial", highlight: true, color: "border-violet-500/50"
-    },
-    {
-      name: "Family", price: "₹599", period: "/month",
-      features: ["Up to 5 members", "Shared budgets", "Family goals", "Dedicated support", "All Pro features", "Custom reports"],
-      cta: "Get Family Plan", highlight: false, color: "border-white/10"
     }
   ];
 
@@ -402,12 +391,13 @@ function Pricing() {
       <div className="relative max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-violet-500/30 bg-violet-500/10 text-violet-300 text-xs font-semibold mb-5">
-            <DollarSign size={11} /> Simple Pricing
+            <DollarSign size={11} /> Free Forever
           </div>
           <h2 className="text-4xl md:text-6xl font-black text-white mb-5 tracking-tight">
             Plans for <span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">Everyone</span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-xl mx-auto">Start free, upgrade when you're ready. No hidden fees.</p>
+          <p className="text-gray-400 text-lg max-w-xl mx-auto">Manage your money smarter with FinTrack Pro — built for students, professionals, and everyday users.
+</p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
@@ -451,11 +441,10 @@ function Pricing() {
 function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
   const faqs = [
-    { q: "Is FinTrack Pro free to use?", a: "Yes! We offer a free Starter plan with up to 50 transactions per month. You can upgrade to Pro or Family plans for unlimited access and advanced features." },
+    { q: "Is FinTrack Pro free to use?", a: "Yes. All features are available for free, with no hidden fees." },
     { q: "How secure is my financial data?", a: "We use bank-level AES-256 encryption, SSL/TLS for all data transfers, and never share your data with third parties. Your privacy is our top priority." },
     { q: "Can I export my financial reports?", a: "Pro and Family plan users can export reports in PDF, CSV, and Excel formats for any time period." },
     { q: "Does it support multiple currencies?", a: "Currently we support INR (₹) with multi-currency support coming in our next major update." },
-    { q: "Can I cancel anytime?", a: "Absolutely. No contracts, no cancellation fees. Cancel anytime from your settings and you'll retain access until the end of your billing period." },
   ];
 
   return (
@@ -498,14 +487,14 @@ function FinalCTA() {
 
           <div className="relative">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-violet-500/30 bg-violet-500/10 text-violet-300 text-xs font-semibold mb-6">
-              <Zap size={11} className="fill-current" /> Limited Time — First Month Free
+              <Zap size={11} className="fill-current" /> Free
             </div>
             <h2 className="text-4xl md:text-6xl font-black text-white mb-5 tracking-tight leading-tight">
               Start Managing Money
               <br /><span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">Smarter Today</span>
             </h2>
             <p className="text-gray-400 text-lg max-w-xl mx-auto mb-10">
-              Join 50,000+ users who've transformed their financial lives. No credit card required.
+              Join 50+ users who've transformed their financial lives. No credit card required.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a href="/register" className="group relative px-8 py-4 text-base font-bold text-white rounded-2xl overflow-hidden shadow-2xl shadow-violet-900/50">
