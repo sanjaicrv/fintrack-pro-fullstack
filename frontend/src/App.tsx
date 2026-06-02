@@ -7,6 +7,7 @@ import AppLayout from './components/Layout/AppLayout'
 import PrivateRoute from './components/Common/PrivateRoute'
 
 // Auth pages
+import LandingPage  from './pages/LandingPage'
 import LoginPage    from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 
@@ -24,7 +25,10 @@ export default function App() {
   return (
     <ThemeProvider>
       <Routes>
-        {/* Public routes */}
+        {/* Landing page — always public */}
+        <Route path="/landing" element={<LandingPage />} />
+
+        {/* Public auth routes — redirect to dashboard if already logged in */}
         <Route path="/login"    element={isAuthenticated ? <Navigate to="/" replace /> : <LoginPage />} />
         <Route path="/register" element={isAuthenticated ? <Navigate to="/" replace /> : <RegisterPage />} />
 
@@ -38,8 +42,8 @@ export default function App() {
           <Route path="/settings"  element={<SettingsPage />}  />
         </Route>
 
-        {/* Fallback */}
-        <Route path="*" element={<Navigate to={isAuthenticated ? '/' : '/login'} replace />} />
+        {/* Fallback — guests go to landing, users go to dashboard */}
+        <Route path="*" element={<Navigate to={isAuthenticated ? '/' : '/landing'} replace />} />
       </Routes>
     </ThemeProvider>
   )
