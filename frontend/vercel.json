@@ -1,8 +1,9 @@
+
 {
   "rewrites": [
     {
-      "source": "/api/:path*",
-      "destination": "https://fintrack-pro-fullstack.onrender.com/api/:path*"
+      "source": "/api/(.*)",
+      "destination": "https://fintrack-pro-fullstack.onrender.com/api/$1"
     },
     {
       "source": "/(.*)",
@@ -10,3 +11,4 @@
     }
   ]
 }
+

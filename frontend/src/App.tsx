@@ -1,3 +1,4 @@
+
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { useAuth } from './context/AuthContext'
 import { ThemeProvider } from './context/ThemeContext'
@@ -20,31 +21,75 @@ import AnalyticsPage from './pages/AnalyticsPage'
 import SettingsPage  from './pages/SettingsPage'
 
 export default function App() {
+
   const { isAuthenticated } = useAuth()
 
   return (
     <ThemeProvider>
+
       <Routes>
-        {/* Landing page — always public */}
+
+        {/* Default route */}
+        <Route
+          path="/"
+          element={
+            isAuthenticated
+              ? <Navigate to="/dashboard" replace />
+              : <Navigate to="/landing" replace />
+          }
+        />
+
+        {/* Public pages */}
         <Route path="/landing" element={<LandingPage />} />
 
-        {/* Public auth routes — redirect to dashboard if already logged in */}
-        <Route path="/login"    element={isAuthenticated ? <Navigate to="/" replace /> : <LoginPage />} />
-        <Route path="/register" element={isAuthenticated ? <Navigate to="/" replace /> : <RegisterPage />} />
+        <Route
+          path="/login"
+          element={
+            isAuthenticated
+              ? <Navigate to="/dashboard" replace />
+              : <LoginPage />
+          }
+        />
+
+        <Route
+          path="/register"
+          element={
+            isAuthenticated
+              ? <Navigate to="/dashboard" replace />
+              : <RegisterPage />
+          }
+        />
 
         {/* Protected routes */}
-        <Route element={<PrivateRoute><AppLayout /></PrivateRoute>}>
-          <Route path="/"          element={<DashboardPage />} />
-          <Route path="/income"    element={<IncomePage />}    />
-          <Route path="/expenses"  element={<ExpensesPage />}  />
-          <Route path="/goals"     element={<GoalsPage />}     />
+        <Route
+          element={
+            <PrivateRoute>
+              <AppLayout />
+            </PrivateRoute>
+          }
+        >
+          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/income" element={<IncomePage />} />
+          <Route path="/expenses" element={<ExpensesPage />} />
+          <Route path="/goals" element={<GoalsPage />} />
           <Route path="/analytics" element={<AnalyticsPage />} />
-          <Route path="/settings"  element={<SettingsPage />}  />
+          <Route path="/settings" element={<SettingsPage />} />
         </Route>
 
-        {/* Fallback — guests go to landing, users go to dashboard */}
-        <Route path="*" element={<Navigate to={isAuthenticated ? '/' : '/landing'} replace />} />
+        {/* Fallback */}
+        <Route
+          path="*"
+          element={
+            <Navigate
+              to={isAuthenticated ? "/dashboard" : "/landing"}
+              replace
+            />
+          }
+        />
+
       </Routes>
+
     </ThemeProvider>
   )
 }
+
