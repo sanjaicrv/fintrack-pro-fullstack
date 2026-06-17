@@ -19,6 +19,7 @@ public class EmailServiceImpl implements EmailService {
     private String fromEmail;
 
     @Override
+    @org.springframework.scheduling.annotation.Async
     public void sendOtpEmail(String to, String otp) {
         try {
             SimpleMailMessage message = new SimpleMailMessage();
