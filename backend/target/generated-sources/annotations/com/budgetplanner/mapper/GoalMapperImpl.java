@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-06-17T22:11:03+0530",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.12 (Oracle Corporation)"
+    date = "2026-06-17T22:51:51+0530",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.46.0.v20260407-0427, environment: Java 21.0.10 (Eclipse Adoptium)"
 )
 @Component
 public class GoalMapperImpl implements GoalMapper {
@@ -24,10 +24,10 @@ public class GoalMapperImpl implements GoalMapper {
 
         Goal.GoalBuilder goal = Goal.builder();
 
-        goal.name( request.getName() );
-        goal.targetAmount( request.getTargetAmount() );
         goal.currentAmount( request.getCurrentAmount() );
         goal.deadline( request.getDeadline() );
+        goal.name( request.getName() );
+        goal.targetAmount( request.getTargetAmount() );
 
         return goal.build();
     }
@@ -40,12 +40,12 @@ public class GoalMapperImpl implements GoalMapper {
 
         GoalResponse.GoalResponseBuilder goalResponse = GoalResponse.builder();
 
+        goalResponse.createdAt( goal.getCreatedAt() );
+        goalResponse.currentAmount( goal.getCurrentAmount() );
+        goalResponse.deadline( goal.getDeadline() );
         goalResponse.id( goal.getId() );
         goalResponse.name( goal.getName() );
         goalResponse.targetAmount( goal.getTargetAmount() );
-        goalResponse.currentAmount( goal.getCurrentAmount() );
-        goalResponse.deadline( goal.getDeadline() );
-        goalResponse.createdAt( goal.getCreatedAt() );
         goalResponse.updatedAt( goal.getUpdatedAt() );
 
         goalResponse.progressPercentage( calculateProgress(goal) );
@@ -75,17 +75,17 @@ public class GoalMapperImpl implements GoalMapper {
             return;
         }
 
-        if ( request.getName() != null ) {
-            goal.setName( request.getName() );
-        }
-        if ( request.getTargetAmount() != null ) {
-            goal.setTargetAmount( request.getTargetAmount() );
-        }
         if ( request.getCurrentAmount() != null ) {
             goal.setCurrentAmount( request.getCurrentAmount() );
         }
         if ( request.getDeadline() != null ) {
             goal.setDeadline( request.getDeadline() );
+        }
+        if ( request.getName() != null ) {
+            goal.setName( request.getName() );
+        }
+        if ( request.getTargetAmount() != null ) {
+            goal.setTargetAmount( request.getTargetAmount() );
         }
     }
 }

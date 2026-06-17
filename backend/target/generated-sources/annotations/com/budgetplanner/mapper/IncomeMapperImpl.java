@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-06-17T22:11:04+0530",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.12 (Oracle Corporation)"
+    date = "2026-06-17T22:51:51+0530",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.46.0.v20260407-0427, environment: Java 21.0.10 (Eclipse Adoptium)"
 )
 @Component
 public class IncomeMapperImpl implements IncomeMapper {
@@ -24,13 +24,13 @@ public class IncomeMapperImpl implements IncomeMapper {
 
         Income.IncomeBuilder income = Income.builder();
 
-        income.source( request.getSource() );
         income.amount( request.getAmount() );
         income.date( request.getDate() );
+        income.frequency( request.getFrequency() );
         if ( request.getRecurring() != null ) {
             income.recurring( request.getRecurring() );
         }
-        income.frequency( request.getFrequency() );
+        income.source( request.getSource() );
 
         return income.build();
     }
@@ -43,13 +43,13 @@ public class IncomeMapperImpl implements IncomeMapper {
 
         IncomeResponse.IncomeResponseBuilder incomeResponse = IncomeResponse.builder();
 
-        incomeResponse.id( income.getId() );
-        incomeResponse.source( income.getSource() );
         incomeResponse.amount( income.getAmount() );
-        incomeResponse.date( income.getDate() );
-        incomeResponse.recurring( income.isRecurring() );
-        incomeResponse.frequency( income.getFrequency() );
         incomeResponse.createdAt( income.getCreatedAt() );
+        incomeResponse.date( income.getDate() );
+        incomeResponse.frequency( income.getFrequency() );
+        incomeResponse.id( income.getId() );
+        incomeResponse.recurring( income.isRecurring() );
+        incomeResponse.source( income.getSource() );
         incomeResponse.updatedAt( income.getUpdatedAt() );
 
         return incomeResponse.build();
@@ -75,20 +75,20 @@ public class IncomeMapperImpl implements IncomeMapper {
             return;
         }
 
-        if ( request.getSource() != null ) {
-            income.setSource( request.getSource() );
-        }
         if ( request.getAmount() != null ) {
             income.setAmount( request.getAmount() );
         }
         if ( request.getDate() != null ) {
             income.setDate( request.getDate() );
         }
+        if ( request.getFrequency() != null ) {
+            income.setFrequency( request.getFrequency() );
+        }
         if ( request.getRecurring() != null ) {
             income.setRecurring( request.getRecurring() );
         }
-        if ( request.getFrequency() != null ) {
-            income.setFrequency( request.getFrequency() );
+        if ( request.getSource() != null ) {
+            income.setSource( request.getSource() );
         }
     }
 }
