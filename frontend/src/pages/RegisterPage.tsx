@@ -63,6 +63,10 @@ export default function RegisterPage() {
   const [showConfirm, setShowConfirm] = useState(false)
   const [loading, setLoading]      = useState(false)
 
+  const handleGoogleLogin = () => {
+    window.location.href = '/api/oauth2/authorization/google'
+  }
+
   const {
     register,
     handleSubmit,
@@ -235,6 +239,7 @@ export default function RegisterPage() {
             {/* Google SSO */}
             <button
               type="button"
+              onClick={handleGoogleLogin}
               className="w-full flex items-center justify-center gap-3 py-3 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20 text-white text-sm font-medium transition-all duration-300 mb-5"
             >
               <GoogleIcon />

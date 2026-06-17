@@ -28,12 +28,49 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    const stored = localStorage.getItem('user')
-    const token = localStorage.getItem('accessToken')
-    if (stored && token) {
-      try { setUser(JSON.parse(stored)) } catch { clearAuth() }
+    const params = new URLSearchParams(window.location.search)
+    const tokenParam = params.get('token')
+    const refreshParam = params.get('refreshToken')
+
+    if (tokenParam && refreshParam) {
+      localStorage.setItem('accessToken', tokenParam)
+      localStorage.setItem('refreshToken', refreshParam)
+
+      // Clean parameters from URL to avoid re-triggering and keep it neat
+      const cleanUrl = window.location.pathname + window.location.hash
+      window.history.replaceState({}, document.title, cleanUrl)
+
+      // Fetch user profile
+      authApi.getMe()
+        .then(res => {
+          const data = res.data.data
+          if (data) {
+            const u: AuthUser = {
+              id: data.id,
+              firstName: data.firstName,
+              lastName: data.lastName,
+              email: data.email,
+              theme: data.theme as 'LIGHT' | 'DARK'
+            }
+            localStorage.setItem('user', JSON.stringify(u))
+            setUser(u)
+            toast.success(`Welcome back, ${u.firstName}!`)
+          }
+          setIsLoading(false)
+        })
+        .catch(() => {
+          clearAuth()
+          toast.error('Google login failed')
+          setIsLoading(false)
+        })
+    } else {
+      const stored = localStorage.getItem('user')
+      const token = localStorage.getItem('accessToken')
+      if (stored && token) {
+        try { setUser(JSON.parse(stored)) } catch { clearAuth() }
+      }
+      setIsLoading(false)
     }
-    setIsLoading(false)
   }, [])
 
   const storeAuth = (res: AuthResponse) => {
