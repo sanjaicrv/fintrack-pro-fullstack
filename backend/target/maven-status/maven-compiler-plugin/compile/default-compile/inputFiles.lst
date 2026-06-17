@@ -1,71 +1,81 @@
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\security\JwtAuthenticationFilter.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\service\IncomeService.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\mapper\IncomeMapper.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\repository\UserRepository.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\service\impl\AnalyticsServiceImpl.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\dto\request\GoalRequest.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\service\GoalService.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\mapper\ExpenseMapper.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\entity\Income.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\mapper\GoalMapper.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\service\impl\IncomeServiceImpl.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\entity\ExpenseCategory.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\dto\response\ExpenseResponse.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\dto\response\AnalyticsResponse.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\security\JwtAuthEntryPoint.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\response\ApiResponse.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\constants\AppConstants.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\controller\AuthController.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\controller\IncomeController.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\BudgetPlannerApplication.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\controller\GoalController.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\config\SecurityConfig.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\controller\AnalyticsController.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\dto\response\SummaryResponse.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\service\impl\GoalServiceImpl.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\service\impl\AuthServiceImpl.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\dto\response\IncomeResponse.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\entity\Goal.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\dto\response\GoalResponse.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\mapper\UserMapper.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\exception\DuplicateResourceException.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\security\JwtService.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\dto\request\LoginRequest.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\dto\response\UserResponse.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\service\impl\ExpenseServiceImpl.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\dto\request\IncomeRequest.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\controller\UserController.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\repository\ExpenseRepository.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\repository\GoalRepository.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\service\UserService.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\dto\request\GoalContributeRequest.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\controller\ExpenseController.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\entity\Frequency.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\util\SecurityUtils.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\config\ApplicationConfig.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\service\impl\UserServiceImpl.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\entity\BaseEntity.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\repository\IncomeRepository.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\dto\response\PagedResponse.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\service\ExpenseService.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\validation\FrequencyValidator.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\service\AnalyticsService.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\entity\User.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\validation\ValidFrequency.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\dto\request\UserUpdateRequest.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\dto\response\AuthResponse.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\dto\request\ChangePasswordRequest.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\exception\UnauthorizedException.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\dto\response\DashboardResponse.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\exception\ResourceNotFoundException.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\entity\Expense.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\config\OpenApiConfig.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\dto\request\RefreshTokenRequest.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\dto\request\RegisterRequest.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\util\DateUtils.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\exception\GlobalExceptionHandler.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\security\UserDetailsServiceImpl.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\service\AuthService.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\dto\request\ExpenseRequest.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\config\CorsConfig.java
-C:\Users\SANJAI CRV\Downloads\budget-planner-fullstack\fullstack\backend\src\main\java\com\budgetplanner\exception\BadRequestException.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\repository\IncomeRepository.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\entity\User.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\service\impl\AnalyticsServiceImpl.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\entity\BaseEntity.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\security\OAuth2AuthenticationSuccessHandler.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\security\JwtAuthenticationFilter.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\service\IncomeService.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\dto\request\ResetPasswordRequest.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\dto\request\IncomeRequest.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\service\UserService.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\dto\request\UserUpdateRequest.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\dto\response\ExpenseResponse.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\repository\ExpenseRepository.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\dto\response\AuthResponse.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\exception\BadRequestException.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\dto\response\AnalyticsResponse.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\security\HttpCookieOAuth2AuthorizationRequestRepository.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\constants\AppConstants.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\validation\ValidFrequency.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\dto\request\RegisterRequest.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\response\ApiResponse.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\entity\Income.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\service\impl\AuthServiceImpl.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\entity\Frequency.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\dto\response\UserResponse.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\config\ApplicationConfig.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\service\impl\EmailServiceImpl.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\config\CorsConfig.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\util\DateUtils.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\dto\response\SummaryResponse.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\config\SecurityConfig.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\repository\UserRepository.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\config\OpenApiConfig.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\service\AuthService.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\repository\GoalRepository.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\service\impl\GoalServiceImpl.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\entity\Expense.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\controller\UserController.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\entity\ExpenseCategory.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\service\impl\ExpenseServiceImpl.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\dto\request\VerifyOtpRequest.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\service\impl\UserServiceImpl.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\util\SecurityUtils.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\security\JwtAuthEntryPoint.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\dto\request\ExpenseRequest.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\dto\request\GoalContributeRequest.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\dto\request\GoalRequest.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\mapper\IncomeMapper.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\exception\ResourceNotFoundException.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\dto\response\GoalResponse.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\service\AnalyticsService.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\controller\GoalController.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\repository\OtpTokenRepository.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\controller\IncomeController.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\entity\Goal.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\mapper\ExpenseMapper.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\dto\request\LoginRequest.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\dto\request\ForgotPasswordRequest.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\controller\AuthController.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\entity\OtpToken.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\mapper\GoalMapper.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\controller\AnalyticsController.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\dto\response\IncomeResponse.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\service\EmailService.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\mapper\UserMapper.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\service\impl\IncomeServiceImpl.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\dto\request\ChangePasswordRequest.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\exception\DuplicateResourceException.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\dto\response\PagedResponse.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\security\UserDetailsServiceImpl.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\BudgetPlannerApplication.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\exception\UnauthorizedException.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\security\CustomOAuth2UserService.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\dto\request\RefreshTokenRequest.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\security\JwtService.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\service\ExpenseService.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\controller\ExpenseController.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\validation\FrequencyValidator.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\exception\GlobalExceptionHandler.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\dto\response\DashboardResponse.java
+D:\Fintrack-Pro Fullstack Project\fintrack-pro-fullstack\backend\src\main\java\com\budgetplanner\service\GoalService.java

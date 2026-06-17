@@ -2,6 +2,9 @@ package com.budgetplanner.config;
 
 import com.budgetplanner.security.JwtAuthEntryPoint;
 import com.budgetplanner.security.JwtAuthenticationFilter;
+import com.budgetplanner.security.CustomOAuth2UserService;
+import com.budgetplanner.security.OAuth2AuthenticationSuccessHandler;
+import com.budgetplanner.security.HttpCookieOAuth2AuthorizationRequestRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,10 +27,15 @@ public class SecurityConfig {
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
     private final JwtAuthEntryPoint jwtAuthEntryPoint;
+    private final CustomOAuth2UserService customOAuth2UserService;
+    private final OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
+    private final HttpCookieOAuth2AuthorizationRequestRepository cookieAuthorizationRequestRepository;
 
     // Public endpoints — no JWT required
     private static final String[] PUBLIC_URLS = {
             "/v1/auth/**",
+            "/oauth2/**",
+            "/login/oauth2/code/**",
             "/v3/api-docs/**",
             "/v3/api-docs.yaml",
             "/swagger-ui/**",
@@ -57,6 +65,21 @@ public class SecurityConfig {
                     .requestMatchers(PUBLIC_URLS).permitAll()
                     .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                     .anyRequest().authenticated()
+            )
+
+            // OAuth2 Login Config
+            .oauth2Login(oauth2 -> oauth2
+                    .authorizationEndpoint(authorization -> authorization
+                            .baseUri("/oauth2/authorization")
+                            .authorizationRequestRepository(cookieAuthorizationRequestRepository)
+                    )
+                    .redirectionEndpoint(redirection -> redirection
+                            .baseUri("/login/oauth2/code/*")
+                    )
+                    .userInfoEndpoint(userInfo -> userInfo
+                            .userService(customOAuth2UserService)
+                    )
+                    .successHandler(oAuth2AuthenticationSuccessHandler)
             )
 
             // JWT authentication provider

@@ -4,6 +4,9 @@ import com.budgetplanner.constants.AppConstants;
 import com.budgetplanner.dto.request.LoginRequest;
 import com.budgetplanner.dto.request.RefreshTokenRequest;
 import com.budgetplanner.dto.request.RegisterRequest;
+import com.budgetplanner.dto.request.ForgotPasswordRequest;
+import com.budgetplanner.dto.request.VerifyOtpRequest;
+import com.budgetplanner.dto.request.ResetPasswordRequest;
 import com.budgetplanner.dto.response.AuthResponse;
 import com.budgetplanner.response.ApiResponse;
 import com.budgetplanner.service.AuthService;
@@ -85,5 +88,64 @@ public class AuthController {
 
         AuthResponse authResponse = authService.refreshToken(request.getRefreshToken());
         return ResponseEntity.ok(ApiResponse.success("Token refreshed successfully", authResponse));
+    }
+
+    // ── POST /api/v1/auth/forgot-password ───────────────────────────────────
+    @Operation(
+        summary = "Forgot password",
+        description = "Triggers the password reset flow. Sends a 6-digit OTP code to the registered email."
+    )
+    @ApiResponses({
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            responseCode = "200", description = "OTP sent successfully"),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            responseCode = "400", description = "Validation error"),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            responseCode = "404", description = "Email not found")
+    })
+    @PostMapping("/forgot-password")
+    public ResponseEntity<ApiResponse<Void>> forgotPassword(
+            @Valid @RequestBody ForgotPasswordRequest request) {
+
+        authService.processForgotPassword(request);
+        return ResponseEntity.ok(ApiResponse.success("OTP sent to your email address"));
+    }
+
+    // ── POST /api/v1/auth/verify-otp ─────────────────────────────────────────
+    @Operation(
+        summary = "Verify OTP",
+        description = "Verifies the 6-digit OTP code sent to the email address."
+    )
+    @ApiResponses({
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            responseCode = "200", description = "OTP verified successfully"),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            responseCode = "400", description = "Invalid or expired OTP")
+    })
+    @PostMapping("/verify-otp")
+    public ResponseEntity<ApiResponse<Void>> verifyOtp(
+            @Valid @RequestBody VerifyOtpRequest request) {
+
+        authService.verifyOtp(request);
+        return ResponseEntity.ok(ApiResponse.success("OTP verified successfully"));
+    }
+
+    // ── POST /api/v1/auth/reset-password ──────────────────────────────────────
+    @Operation(
+        summary = "Reset password",
+        description = "Resets the user's password using the verified OTP code."
+    )
+    @ApiResponses({
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            responseCode = "200", description = "Password reset successfully"),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            responseCode = "400", description = "Invalid password/OTP or passwords do not match")
+    })
+    @PostMapping("/reset-password")
+    public ResponseEntity<ApiResponse<Void>> resetPassword(
+            @Valid @RequestBody ResetPasswordRequest request) {
+
+        authService.resetPassword(request);
+        return ResponseEntity.ok(ApiResponse.success("Password reset successfully"));
     }
 }
