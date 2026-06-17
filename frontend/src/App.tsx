@@ -11,6 +11,7 @@ import PrivateRoute from './components/Common/PrivateRoute'
 import LandingPage  from './pages/LandingPage'
 import LoginPage    from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
+import ForgotPasswordPage from './pages/ForgotPasswordPage'
 
 // App pages
 import DashboardPage from './pages/DashboardPage'
@@ -57,6 +58,15 @@ export default function App() {
             isAuthenticated
               ? <Navigate to="/dashboard" replace />
               : <RegisterPage />
+          }
+        />
+
+        <Route
+          path="/forgot-password"
+          element={
+            isAuthenticated
+              ? <Navigate to="/dashboard" replace />
+              : <ForgotPasswordPage />
           }
         />
 

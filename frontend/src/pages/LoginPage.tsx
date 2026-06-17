@@ -256,12 +256,12 @@ export default function LoginPage() {
                   <label className="text-gray-400 text-xs font-medium uppercase tracking-wider">
                     Password
                   </label>
-                  <a
-                    href="#"
+                  <Link
+                    to="/forgot-password"
                     className="text-violet-400 hover:text-violet-300 text-xs transition-colors"
                   >
                     Forgot password?
-                  </a>
+                  </Link>
                 </div>
                 <div className="relative">
                   <Lock
