@@ -30,6 +30,7 @@ public class SecurityConfig {
     private final CustomOAuth2UserService customOAuth2UserService;
     private final OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
     private final HttpCookieOAuth2AuthorizationRequestRepository cookieAuthorizationRequestRepository;
+    private final com.budgetplanner.security.RateLimitingFilter rateLimitingFilter;
 
     // Public endpoints — no JWT required
     private static final String[] PUBLIC_URLS = {
@@ -84,6 +85,9 @@ public class SecurityConfig {
 
             // JWT authentication provider
             .authenticationProvider(authenticationProvider)
+
+            // Rate limiting filter for brute force protection
+            .addFilterBefore(rateLimitingFilter, UsernamePasswordAuthenticationFilter.class)
 
             // Add JWT filter before UsernamePasswordAuthenticationFilter
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);

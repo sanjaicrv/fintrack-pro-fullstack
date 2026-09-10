@@ -108,7 +108,7 @@ public class AuthController {
             @Valid @RequestBody ForgotPasswordRequest request) {
 
         authService.processForgotPassword(request);
-        return ResponseEntity.ok(ApiResponse.success("OTP sent to your email address"));
+        return ResponseEntity.ok(ApiResponse.success("A secure 6-digit OTP has been sent to your email address. Please check your inbox."));
     }
 
     // ── POST /api/v1/auth/verify-otp ─────────────────────────────────────────

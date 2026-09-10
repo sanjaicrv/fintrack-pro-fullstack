@@ -114,28 +114,23 @@ public class AuthServiceImpl implements AuthService {
         log.info("Processing forgot password request for email: {}", email);
 
         if (!userRepository.existsByEmail(email)) {
-            throw new com.budgetplanner.exception.ResourceNotFoundException("User not found with email: " + email);
+            throw new com.budgetplanner.exception.ResourceNotFoundException("No account found with email: " + email);
         }
 
         // Generate a secure 6-digit OTP
         String otp = generateSecureOtp();
 
-        // Expire in 5 minutes
-        java.time.LocalDateTime expiryDate = java.time.LocalDateTime.now().plusMinutes(5);
+        // Expire in 10 minutes to give ample time
+        java.time.LocalDateTime expiryDate = java.time.LocalDateTime.now().plusMinutes(10);
 
-        // Delete any existing OTP token for this email to avoid duplicates
-        otpTokenRepository.findByEmail(email).ifPresent(otpTokenRepository::delete);
-
-        OtpToken otpToken = OtpToken.builder()
-                .email(email)
-                .otpCode(otp)
-                .expiryDate(expiryDate)
-                .build();
-
+        // Safe upsert to prevent unique constraint conflict on email
+        OtpToken otpToken = otpTokenRepository.findByEmail(email)
+                .orElse(OtpToken.builder().email(email).build());
+        otpToken.setOtpCode(otp);
+        otpToken.setExpiryDate(expiryDate);
         otpTokenRepository.save(otpToken);
-        log.info("OTP generated and saved for email: {}", email);
 
-        // Send OTP via email
+        // Send OTP via SMTP email
         emailService.sendOtpEmail(email, otp);
     }
 

@@ -66,6 +66,24 @@ public class UserController {
         return ResponseEntity.ok(ApiResponse.success(AppConstants.USER_UPDATED, updated));
     }
 
+    // ── PUT /api/v1/users/budget ──────────────────────────────────────────────
+    @Operation(
+        summary = "Update monthly budget cap",
+        description = "Sets or updates the monthly budget threshold for the authenticated user"
+    )
+    @ApiResponses({
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Monthly budget updated"),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "Validation error"),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "Unauthorized")
+    })
+    @PutMapping("/budget")
+    public ResponseEntity<ApiResponse<UserResponse>> updateMonthlyBudget(
+            @Valid @RequestBody com.budgetplanner.dto.request.UpdateBudgetRequest request) {
+
+        UserResponse updated = userService.updateMonthlyBudget(request.getMonthlyBudget());
+        return ResponseEntity.ok(ApiResponse.success("Monthly budget updated successfully", updated));
+    }
+
     // ── PATCH /api/v1/users/me/theme ──────────────────────────────────────────
     @Operation(
         summary = "Toggle theme",

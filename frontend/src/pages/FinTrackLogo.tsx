@@ -29,6 +29,25 @@ export default function FinTrackLogo({
   const textEl = textSizes[size];
   const roundEl = roundeds[size];
 
+  // Colors based on variant ensuring sharp contrast on both light and dark backgrounds
+  const getFinClass = () => {
+    if (variant === "white") return "text-white";
+    if (variant === "gradient") return "bg-gradient-to-r from-violet-600 to-indigo-600 dark:from-violet-400 dark:to-indigo-400 bg-clip-text text-transparent";
+    return "text-slate-900 dark:text-white";
+  };
+
+  const getTrackClass = () => {
+    if (variant === "white") return "text-violet-300";
+    if (variant === "gradient") return "text-indigo-600 dark:text-indigo-400";
+    return "text-violet-600 dark:text-violet-400";
+  };
+
+  const getProClass = () => {
+    if (variant === "white") return "text-violet-300";
+    if (variant === "gradient") return "text-indigo-500 dark:text-indigo-400";
+    return "text-violet-600 dark:text-violet-400";
+  };
+
   return (
     <div className="flex items-center gap-2.5 group cursor-pointer select-none">
       {/* Icon Box */}
@@ -49,21 +68,11 @@ export default function FinTrackLogo({
       {/* Text — hidden when collapsed */}
       {!collapsed && (
         <div className="flex items-baseline overflow-hidden">
-          <span className={`font-black ${textEl} tracking-tight leading-none`}
-            style={{ color: variant === "white" ? "white" : variant === "gradient" ? undefined : "#f1f5f9" }}>
-            {variant === "gradient" ? (
-              <>
-                <span className="text-violet-400">Fin</span>
-                <span className="text-white">Track</span>
-              </>
-            ) : (
-              <>
-                <span>Fin</span>
-                <span className="text-violet-400">Track</span>
-              </>
-            )}
+          <span className={`font-black ${textEl} tracking-tight leading-none`}>
+            <span className={getFinClass()}>Fin</span>
+            <span className={getTrackClass()}>Track</span>
           </span>
-          <span className={`text-[9px] align-super font-bold ml-0.5 text-violet-300 leading-none`}>
+          <span className={`text-[10px] align-super font-bold ml-1 leading-none tracking-wider ${getProClass()}`}>
             PRO
           </span>
         </div>

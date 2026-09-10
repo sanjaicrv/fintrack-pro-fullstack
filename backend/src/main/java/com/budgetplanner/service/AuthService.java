@@ -26,7 +26,7 @@ public interface AuthService {
 
     /**
      * Triggers the forgot-password flow by verifying the email, generating a secure 6-digit OTP,
-     * and sending it to the user's registered email address.
+     * and sending it to the user's registered email address via SMTP.
      */
     void processForgotPassword(ForgotPasswordRequest request);
 

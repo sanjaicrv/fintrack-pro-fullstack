@@ -39,6 +39,7 @@ export interface UserResponse {
   lastName: string
   email: string
   theme: Theme
+  monthlyBudget?: number
   createdAt: string
 }
 export interface UserUpdateRequest {
@@ -149,10 +150,55 @@ export interface DashboardResponse {
   totalExpense: number
   savings: number
   savingsRate: number
+  allTimeIncome?: number
+  allTimeExpense?: number
+  allTimeSavings?: number
+  selectedYear?: number
+  selectedMonth?: number
+  selectedPeriod?: string
+  previousMonthSavings?: number
+  savingsDelta?: number
+  savingsGrowthRate?: number
+  savingsComparisonMessage?: string
+  monthlyBudget?: number
+  budgetSpent?: number
+  budgetRemaining?: number
+  budgetUsedPercentage?: number
+  budgetExceeded?: boolean
+  budgetAlertLevel?: 'NORMAL' | 'WARNING' | 'EXCEEDED' | 'NOT_SET'
+  dailySafeToSpend?: number
+  daysRemainingInMonth?: number
+  daysInMonth?: number
   recentIncomes: IncomeResponse[]
   recentExpenses: ExpenseResponse[]
   goals: GoalResponse[]
   monthlySummaries: MonthlySummary[]
+}
+
+export interface CategoryBudgetResponse {
+  category: ExpenseCategory
+  categoryLabel: string
+  budgetAmount: number
+  spentAmount: number
+  remainingAmount: number
+  percentageUsed: number
+  status: 'NORMAL' | 'WARNING' | 'EXCEEDED'
+}
+
+export interface BankSyncResultResponse {
+  sourceName: string
+  importedCount: number
+  skippedDuplicatesCount: number
+  totalExpensesAdded: number
+  totalIncomesAdded: number
+  message: string
+  items: Array<{
+    date: string
+    description: string
+    amount: number
+    type: string
+    category: string
+  }>
 }
 
 // ── Shared ─────────────────────────────────────────────────────────────────

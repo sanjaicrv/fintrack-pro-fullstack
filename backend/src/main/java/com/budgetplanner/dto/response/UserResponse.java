@@ -19,5 +19,6 @@ public class UserResponse {
     private String lastName;
     private String email;
     private User.Theme theme;
+    private java.math.BigDecimal monthlyBudget;
     private LocalDateTime createdAt;
 }

@@ -12,17 +12,16 @@ import {
 function getPasswordStrength(pw: string): { score: number; label: string; color: string } {
   if (!pw) return { score: 0, label: '', color: '' }
   let score = 0
-  if (pw.length >= 8)              score++
-  if (/[A-Z]/.test(pw))           score++
-  if (/[0-9]/.test(pw))           score++
-  if (/[^a-zA-Z0-9]/.test(pw))   score++
-  if (pw.length >= 12)            score++
+  if (pw.length >= 8) score++
+  if (/[A-Z]/.test(pw)) score++
+  if (/[a-z]/.test(pw)) score++
+  if (/[0-9]/.test(pw)) score++
+  if (/[^a-zA-Z0-9\s]/.test(pw)) score++
 
-  if (score <= 1) return { score, label: 'Weak',      color: 'bg-red-500' }
-  if (score <= 2) return { score, label: 'Fair',      color: 'bg-orange-400' }
-  if (score <= 3) return { score, label: 'Good',      color: 'bg-yellow-400' }
-  if (score <= 4) return { score, label: 'Strong',    color: 'bg-emerald-400' }
-  return              { score, label: 'Excellent', color: 'bg-violet-400' }
+  if (score <= 2) return { score, label: 'Weak', color: 'bg-red-500' }
+  if (score === 3) return { score, label: 'Fair', color: 'bg-orange-400' }
+  if (score === 4) return { score, label: 'Good', color: 'bg-yellow-400' }
+  return { score, label: 'Strong', color: 'bg-emerald-400' }
 }
 
 const strengthBadgeClass: Record<string, string> = {
@@ -30,7 +29,6 @@ const strengthBadgeClass: Record<string, string> = {
   Fair:      'bg-orange-500/10 text-orange-400',
   Good:      'bg-yellow-500/10 text-yellow-400',
   Strong:    'bg-emerald-500/10 text-emerald-400',
-  Excellent: 'bg-violet-500/10 text-violet-400',
 }
 
 function GoogleIcon() {
@@ -73,16 +71,17 @@ export default function RegisterPage() {
     watch,
     formState: { errors },
     setError,
-  } = useForm<RegisterFormValues>()
+  } = useForm<RegisterFormValues>({ mode: 'onChange' })
 
   const passwordValue = watch('password', '')
   const strength      = getPasswordStrength(passwordValue)
 
   const pwChecks = [
-    { label: 'At least 8 characters',  pass: passwordValue.length >= 8 },
-    { label: 'One uppercase letter',    pass: /[A-Z]/.test(passwordValue) },
-    { label: 'One number',             pass: /[0-9]/.test(passwordValue) },
-    { label: 'One special character',  pass: /[^a-zA-Z0-9]/.test(passwordValue) },
+    { label: 'At least 8 characters', pass: passwordValue.length >= 8 },
+    { label: 'One uppercase letter (A-Z)', pass: /[A-Z]/.test(passwordValue) },
+    { label: 'One lowercase letter (a-z)', pass: /[a-z]/.test(passwordValue) },
+    { label: 'One number (0-9)', pass: /[0-9]/.test(passwordValue) },
+    { label: 'One special character (!@#$...)', pass: /[^a-zA-Z0-9\s]/.test(passwordValue) },
   ]
 
   const onSubmit = async (data: RegisterFormValues) => {
@@ -96,8 +95,16 @@ export default function RegisterPage() {
       })
       navigate('/dashboard')
     } catch (err: any) {
-      const msg = err?.response?.data?.message || 'Registration failed'
-      setError('email', { message: msg })
+      const fieldErrors = err?.response?.data?.errors
+      if (fieldErrors && typeof fieldErrors === 'object') {
+        if (fieldErrors.password) setError('password', { message: fieldErrors.password })
+        if (fieldErrors.email) setError('email', { message: fieldErrors.email })
+        if (fieldErrors.firstName) setError('firstName', { message: fieldErrors.firstName })
+        if (fieldErrors.lastName) setError('lastName', { message: fieldErrors.lastName })
+      } else {
+        const msg = err?.response?.data?.message || 'Registration failed'
+        setError('email', { message: msg })
+      }
     } finally {
       setLoading(false)
     }
@@ -360,7 +367,13 @@ export default function RegisterPage() {
                     type={showPw ? 'text' : 'password'}
                     {...register('password', {
                       required: 'Password is required',
-                      minLength: { value: 8, message: 'At least 8 characters required' },
+                      validate: {
+                        minLength: (v) => v.length >= 8 || 'Password must be at least 8 characters',
+                        uppercase: (v) => /[A-Z]/.test(v) || 'Must contain at least one uppercase letter (A-Z)',
+                        lowercase: (v) => /[a-z]/.test(v) || 'Must contain at least one lowercase letter (a-z)',
+                        number: (v) => /[0-9]/.test(v) || 'Must contain at least one number (0-9)',
+                        special: (v) => /[^a-zA-Z0-9\s]/.test(v) || 'Must contain at least one special character (!@#$%...)',
+                      },
                     })}
                     placeholder="••••••••"
                     className={`w-full bg-white/5 border text-white placeholder-gray-600 rounded-xl pl-11 pr-12 py-3.5 text-sm outline-none transition-all duration-300 ${
@@ -381,25 +394,28 @@ export default function RegisterPage() {
 
                 {/* Strength meter + checklist */}
                 {passwordValue && (
-                  <div className="mt-2 space-y-2">
-                    <div className="flex gap-1 h-1">
-                      {[1, 2, 3, 4, 5].map(i => (
-                        <div
-                          key={i}
-                          className={`flex-1 rounded-full transition-all duration-300 ${
-                            i <= strength.score ? strength.color : 'bg-white/10'
-                          }`}
-                        />
-                      ))}
+                  <div className="mt-2.5 p-3 rounded-xl bg-white/[0.03] border border-white/10 space-y-2">
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="text-gray-400 font-medium">Password Requirements</span>
+                      <div className="flex gap-1 h-1.5 w-24">
+                        {[1, 2, 3, 4, 5].map(i => (
+                          <div
+                            key={i}
+                            className={`flex-1 rounded-full transition-all duration-300 ${
+                              i <= strength.score ? strength.color : 'bg-white/10'
+                            }`}
+                          />
+                        ))}
+                      </div>
                     </div>
-                    <div className="grid grid-cols-2 gap-1">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 pt-1">
                       {pwChecks.map((c, i) => (
                         <div key={i} className="flex items-center gap-1.5">
                           {c.pass
-                            ? <CheckCircle size={11} className="text-emerald-400 flex-shrink-0" />
-                            : <XCircle    size={11} className="text-gray-600 flex-shrink-0" />
+                            ? <CheckCircle size={12} className="text-emerald-400 flex-shrink-0" />
+                            : <XCircle    size={12} className="text-gray-600 flex-shrink-0" />
                           }
-                          <span className={`text-xs ${c.pass ? 'text-emerald-400/80' : 'text-gray-600'}`}>
+                          <span className={`text-[11px] ${c.pass ? 'text-emerald-400/90 font-medium' : 'text-gray-500'}`}>
                             {c.label}
                           </span>
                         </div>

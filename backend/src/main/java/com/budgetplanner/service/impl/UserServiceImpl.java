@@ -37,9 +37,24 @@ public class UserServiceImpl implements UserService {
         user.setFirstName(request.getFirstName());
         user.setLastName(request.getLastName());
         user.setTheme(request.getTheme());
+        if (request.getMonthlyBudget() != null) {
+            user.setMonthlyBudget(request.getMonthlyBudget());
+        }
 
         user = userRepository.save(user);
         log.info("User profile updated for id: {}", user.getId());
+        return userMapper.toResponse(user);
+    }
+
+    @Override
+    @Transactional
+    public UserResponse updateMonthlyBudget(java.math.BigDecimal budget) {
+        User user = SecurityUtils.getCurrentUser();
+        log.info("Updating monthly budget to {} for user id: {}", budget, user.getId());
+
+        user.setMonthlyBudget(budget != null ? budget : java.math.BigDecimal.ZERO);
+        user = userRepository.save(user);
+        log.info("Monthly budget updated successfully for user id: {}", user.getId());
         return userMapper.toResponse(user);
     }
 

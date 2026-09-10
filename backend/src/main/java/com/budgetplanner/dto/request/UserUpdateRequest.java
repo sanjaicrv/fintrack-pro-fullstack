@@ -25,4 +25,6 @@ public class UserUpdateRequest {
 
     @NotNull(message = "Theme is required")
     private User.Theme theme;
+
+    private java.math.BigDecimal monthlyBudget;
 }

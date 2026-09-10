@@ -22,6 +22,11 @@ public interface UserService {
     UserResponse toggleTheme();
 
     /**
+     * Updates the monthly budget cap for the current user.
+     */
+    UserResponse updateMonthlyBudget(java.math.BigDecimal budget);
+
+    /**
      * Returns the raw User entity by ID (internal use).
      */
     User getUserEntityById(Long id);

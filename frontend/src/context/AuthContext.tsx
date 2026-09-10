@@ -31,6 +31,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const params = new URLSearchParams(window.location.search)
     const tokenParam = params.get('token')
     const refreshParam = params.get('refreshToken')
+    const errorParam = params.get('error')
+
+    if (errorParam) {
+      const cleanUrl = window.location.pathname + window.location.hash
+      window.history.replaceState({}, document.title, cleanUrl)
+      toast.error('Google sign-in was cancelled or encountered an error.')
+      setIsLoading(false)
+      return
+    }
 
     if (tokenParam && refreshParam) {
       localStorage.setItem('accessToken', tokenParam)

@@ -61,6 +61,28 @@ public class GlobalExceptionHandler {
                 .body(ApiResponse.error(message));
     }
 
+    @ExceptionHandler(org.springframework.http.converter.HttpMessageNotReadableException.class)
+    public ResponseEntity<ApiResponse<Void>> handleHttpMessageNotReadable(org.springframework.http.converter.HttpMessageNotReadableException ex) {
+        log.warn("Malformed JSON or unreadable message: {}", ex.getMessage());
+        String detail = "Malformed request payload or invalid data format.";
+        Throwable cause = ex.getCause();
+        if (cause instanceof com.fasterxml.jackson.databind.exc.InvalidFormatException ife) {
+            String field = ife.getPath().isEmpty() ? "field" : ife.getPath().get(0).getFieldName();
+            String targetType = ife.getTargetType() != null ? ife.getTargetType().getSimpleName() : "valid format";
+            detail = String.format("Invalid value '%s' for field '%s'. Expected %s.", ife.getValue(), field, targetType);
+        } else if (ex.getMessage() != null && ex.getMessage().contains("Cannot deserialize value of type")) {
+            detail = "Invalid value type in request body. Please check field types and enum options.";
+        }
+        return ResponseEntity.badRequest().body(ApiResponse.error(detail));
+    }
+
+    @ExceptionHandler(org.springframework.web.HttpRequestMethodNotSupportedException.class)
+    public ResponseEntity<ApiResponse<Void>> handleMethodNotSupported(org.springframework.web.HttpRequestMethodNotSupportedException ex) {
+        log.warn("Method not supported: {}", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED)
+                .body(ApiResponse.error(String.format("HTTP method '%s' is not supported for this endpoint.", ex.getMethod())));
+    }
+
     // ── 401 Unauthorized ───────────────────────────────────────────────────
 
     @ExceptionHandler(UnauthorizedException.class)

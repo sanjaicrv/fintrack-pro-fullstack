@@ -1,0 +1,85 @@
+version: '3.8'
+
+services:
+  # ==========================================================
+  # 1. DATABASE: MySQL 8.0
+  # ==========================================================
+  mysql:
+    image: mysql:8.0
+    container_name: fintrack-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_NAME:-budget_planner_db}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-root}
+    command:
+      - --default-authentication-plugin=mysql_native_password
+      - --performance_schema=OFF
+      - --innodb-buffer-pool-size=64M
+      - --max-connections=30
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - fintrack-network
+
+  # ==========================================================
+  # 2. BACKEND: Spring Boot REST API
+  # ==========================================================
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: fintrack-backend
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: ${DB_NAME:-budget_planner_db}
+      DB_USERNAME: ${DB_USERNAME:-root}
+      DB_PASSWORD: ${DB_PASSWORD:-root}
+      JWT_SECRET: ${JWT_SECRET:-4A616E61526F636B6574536563726574546F6B656E4B657932303234426F6F74}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-your-google-client-id.apps.googleusercontent.com}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-your-google-client-secret}
+      OAUTH2_REDIRECT_URI: ${OAUTH2_REDIRECT_URI:-http://localhost/dashboard}
+      MAIL_USERNAME: ${MAIL_USERNAME:-sanjaicrv25@gmail.com}
+      MAIL_PASSWORD: ${MAIL_PASSWORD:-oigpotjsdmycughk}
+    ports:
+      - "8080:8080"
+    networks:
+      - fintrack-network
+
+  # ==========================================================
+  # 3. FRONTEND: React Vite + Nginx Reverse Proxy
+  # ==========================================================
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: fintrack-frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+    networks:
+      - fintrack-network
+
+# ==========================================================
+# VOLUMES & NETWORKS
+# ==========================================================
+volumes:
+  mysql_data:
+    driver: local
+
+networks:
+  fintrack-network:
+    driver: bridge

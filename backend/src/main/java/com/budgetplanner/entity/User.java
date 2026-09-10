@@ -6,6 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -46,6 +47,10 @@ public class User extends BaseEntity implements UserDetails {
     @Column(name = "theme", nullable = false, length = 10)
     @Builder.Default
     private Theme theme = Theme.LIGHT;
+
+    @Column(name = "monthly_budget", precision = 15, scale = 2)
+    @Builder.Default
+    private BigDecimal monthlyBudget = BigDecimal.ZERO;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @Builder.Default

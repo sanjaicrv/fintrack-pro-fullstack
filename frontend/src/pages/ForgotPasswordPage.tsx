@@ -5,7 +5,7 @@ import { authApi } from '../api/auth'
 import toast from 'react-hot-toast'
 import {
   Mail, Lock, KeyRound, ArrowRight, ArrowLeft,
-  Shield, CheckCircle, XCircle
+  Shield, CheckCircle, XCircle, Eye, EyeOff, ShieldCheck, Sparkles, RefreshCw
 } from 'lucide-react'
 
 interface ForgotFormValues {
@@ -37,18 +37,27 @@ export default function ForgotPasswordPage() {
     register: registerReset,
     handleSubmit: handleResetSubmit,
     watch: watchReset,
+    setValue: setValueReset,
     formState: { errors: resetErrors },
     setError: setResetError,
-  } = useForm<ResetFormValues>()
+  } = useForm<ResetFormValues>({ mode: 'onChange' })
 
   const newPasswordValue = watchReset('newPassword', '')
+
+  const pwChecks = [
+    { label: 'At least 8 characters', pass: newPasswordValue.length >= 8 },
+    { label: 'One uppercase letter (A-Z)', pass: /[A-Z]/.test(newPasswordValue) },
+    { label: 'One lowercase letter (a-z)', pass: /[a-z]/.test(newPasswordValue) },
+    { label: 'One number (0-9)', pass: /[0-9]/.test(newPasswordValue) },
+    { label: 'One special character (!@#$...)', pass: /[^a-zA-Z0-9\s]/.test(newPasswordValue) },
+  ]
 
   const onRequestOtp = async (data: ForgotFormValues) => {
     setLoading(true)
     try {
       await authApi.forgotPassword(data.email)
       setEmail(data.email)
-      toast.success('6-digit OTP sent to your email!')
+      toast.success('6-digit OTP dispatched to your email! Please check your inbox.')
       setStep('RESET')
     } catch (err: any) {
       const msg = err?.response?.data?.message || 'Failed to send OTP. Please check the email address.'
@@ -63,56 +72,67 @@ export default function ForgotPasswordPage() {
     try {
       await authApi.resetPassword({
         email,
-        otpCode: data.otpCode,
+        otpCode: data.otpCode.trim(),
         newPassword: data.newPassword,
         confirmPassword: data.confirmPassword,
       })
-      toast.success('Password reset successfully! Please sign in.')
+      toast.success('Password reset successfully! Please sign in with your new password.')
       navigate('/login')
     } catch (err: any) {
+      const fieldErrors = err?.response?.data?.errors
+      if (fieldErrors && typeof fieldErrors === 'object') {
+        if (fieldErrors.newPassword) setResetError('newPassword', { message: fieldErrors.newPassword })
+        if (fieldErrors.otpCode) setResetError('otpCode', { message: fieldErrors.otpCode })
+        if (fieldErrors.confirmPassword) setResetError('confirmPassword', { message: fieldErrors.confirmPassword })
+      }
       const msg = err?.response?.data?.message || 'Password reset failed. Please check the OTP code.'
-      setResetError('otpCode', { message: msg })
+      if (!fieldErrors?.newPassword && !fieldErrors?.confirmPassword) {
+        setResetError('otpCode', { message: msg })
+      }
+      toast.error(msg)
     } finally {
       setLoading(false)
     }
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#050510] p-6" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800;900&display=swap');
-      `}</style>
-
-      {/* Decorative background gradients */}
-      <div className="absolute inset-0 bg-gradient-to-br from-violet-900/20 via-purple-900/10 to-indigo-900/20 pointer-events-none" />
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-violet-500/5 blur-3xl animate-pulse pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-indigo-500/5 blur-3xl animate-pulse pointer-events-none" />
+    <div className="min-h-screen flex items-center justify-center bg-[#070b14] text-slate-100 p-4 sm:p-6 relative overflow-hidden font-sans">
+      {/* Background accents */}
+      <div className="absolute -top-40 -left-40 w-96 h-96 rounded-full bg-primary-500/10 blur-[120px] pointer-events-none" />
+      <div className="absolute -bottom-40 -right-40 w-96 h-96 rounded-full bg-emerald-500/10 blur-[120px] pointer-events-none" />
 
       <div className="w-full max-w-md relative z-10">
         
-        {/* Logo or back navigation */}
+        {/* Back navigation */}
         <div className="mb-6">
-          <Link to="/login" className="inline-flex items-center gap-2 text-violet-400 hover:text-violet-300 text-sm font-semibold transition-colors">
-            <ArrowLeft size={16} />
-            Back to Sign In
+          <Link
+            to="/login"
+            className="inline-flex items-center gap-2 text-slate-400 hover:text-white text-xs font-semibold transition-colors"
+          >
+            <ArrowLeft size={14} />
+            <span>Back to Sign In</span>
           </Link>
         </div>
 
         {/* Card wrapper */}
-        <div className="relative rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur-xl p-8 shadow-2xl">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-px bg-gradient-to-r from-transparent via-violet-500 to-transparent" />
+        <div className="relative rounded-3xl border border-slate-800 bg-[#0e1424]/90 backdrop-blur-2xl p-7 sm:p-9 shadow-2xl shadow-black/50">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-[2px] bg-gradient-to-r from-transparent via-primary-500 to-transparent" />
 
           {step === 'REQUEST' ? (
             <div>
-              <div className="mb-6">
-                <h1 className="text-2xl font-black text-white mb-2">Forgot Password? 🔒</h1>
-                <p className="text-gray-400 text-sm leading-relaxed">
-                  Enter your email address and we'll send you a 6-digit OTP code to reset your password.
+              <div className="mb-6 space-y-1.5">
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary-500/10 border border-primary-500/20 text-primary-400 text-[11px] font-bold uppercase tracking-wider mb-1">
+                  <KeyRound size={12} />
+                  <span>Security Vault</span>
+                </div>
+                <h1 className="text-2xl font-bold text-white tracking-tight">Forgot Password</h1>
+                <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">
+                  Enter your registered email address. We'll issue a secure 6-digit OTP code to verify and reset your credentials.
                 </p>
               </div>
 
               {requestErrors.email?.message && (
-                <div className="mb-5 px-4 py-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
+                <div className="mb-5 px-4 py-3 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs">
                   {requestErrors.email.message}
                 </div>
               )}
@@ -120,23 +140,21 @@ export default function ForgotPasswordPage() {
               <form onSubmit={handleRequestSubmit(onRequestOtp)} className="space-y-4" noValidate>
                 {/* Email Address */}
                 <div>
-                  <label className="block text-gray-400 text-xs font-medium uppercase tracking-wider mb-2">
-                    Email Address
+                  <label className="label">
+                    Registered Email Address
                   </label>
                   <div className="relative">
-                    <Mail size={15} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none" />
+                    <Mail size={15} className="absolute left-3.5 top-3 text-slate-500 pointer-events-none" />
                     <input
                       type="email"
                       {...registerRequest('email', {
-                        required: 'Email is required',
-                        pattern: { value: /\S+@\S+\.\S+/, message: 'Invalid email address' }
+                        required: 'Email address is required',
+                        pattern: { value: /\S+@\S+\.\S+/, message: 'Please enter a valid email address' }
                       })}
-                      placeholder="you@example.com"
+                      placeholder="e.g. name@example.com"
                       autoFocus
-                      className={`w-full bg-white/5 border text-white placeholder-gray-600 rounded-xl pl-11 pr-4 py-3.5 text-sm outline-none transition-all duration-300 ${
-                        requestErrors.email
-                          ? 'border-red-500/50 focus:border-red-500/70'
-                          : 'border-white/10 focus:border-violet-500/60 focus:bg-white/[0.07]'
+                      className={`input pl-10 ${
+                        requestErrors.email ? 'border-rose-500/60 focus:border-rose-500' : ''
                       }`}
                     />
                   </div>
@@ -145,27 +163,45 @@ export default function ForgotPasswordPage() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full relative py-3.5 rounded-xl font-bold text-white text-sm overflow-hidden group disabled:opacity-70 disabled:cursor-not-allowed mt-2"
+                  className="btn-primary w-full py-3 justify-center text-sm mt-2"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-violet-600 to-indigo-600 group-hover:from-violet-500 group-hover:to-indigo-500 transition-all duration-300" />
-                  <span className="relative flex items-center justify-center gap-2">
-                    {loading ? 'Sending OTP…' : 'Send OTP Code'}
-                    {!loading && <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />}
-                  </span>
+                  {loading ? (
+                    <>
+                      <RefreshCw className="w-4 h-4 animate-spin" />
+                      <span>Generating OTP...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>Send 6-Digit OTP</span>
+                      <ArrowRight size={15} />
+                    </>
+                  )}
                 </button>
               </form>
             </div>
           ) : (
             <div>
-              <div className="mb-6">
-                <h1 className="text-2xl font-black text-white mb-2">Reset Password 🔑</h1>
-                <p className="text-gray-400 text-sm leading-relaxed">
-                  We sent a 6-digit OTP code to <strong className="text-violet-300">{email}</strong>. Enter the OTP code and set your new password.
+              <div className="mb-5 space-y-1.5">
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[11px] font-bold uppercase tracking-wider mb-1">
+                  <ShieldCheck size={12} />
+                  <span>Verification Step</span>
+                </div>
+                <h1 className="text-2xl font-bold text-white tracking-tight">Set New Password</h1>
+                <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">
+                  Enter the 6-digit OTP code for <strong className="text-white font-medium">{email}</strong> and choose your new password.
+                </p>
+              </div>
+
+              {/* Security Delivery Notice */}
+              <div className="mb-5 p-3.5 rounded-2xl bg-primary-500/10 border border-primary-500/30 text-xs text-slate-300 flex items-start gap-3">
+                <Mail className="w-4 h-4 text-primary-400 flex-shrink-0 mt-0.5" />
+                <p className="leading-relaxed">
+                  A confidential 6-digit verification code was sent to <strong className="text-white">{email}</strong>. Please check your inbox (and spam folder) and enter it below.
                 </p>
               </div>
 
               {resetErrors.otpCode?.message && (
-                <div className="mb-5 px-4 py-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
+                <div className="mb-5 px-4 py-3 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs">
                   {resetErrors.otpCode.message}
                 </div>
               )}
@@ -173,11 +209,11 @@ export default function ForgotPasswordPage() {
               <form onSubmit={handleResetSubmit(onResetPassword)} className="space-y-4" noValidate>
                 {/* OTP Code */}
                 <div>
-                  <label className="block text-gray-400 text-xs font-medium uppercase tracking-wider mb-2">
+                  <label className="label">
                     6-Digit OTP Code
                   </label>
                   <div className="relative">
-                    <KeyRound size={15} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none" />
+                    <KeyRound size={15} className="absolute left-3.5 top-3 text-slate-500 pointer-events-none" />
                     <input
                       type="text"
                       maxLength={6}
@@ -185,90 +221,133 @@ export default function ForgotPasswordPage() {
                         required: 'OTP code is required',
                         pattern: { value: /^\d{6}$/, message: 'OTP must be exactly 6 digits' }
                       })}
-                      placeholder="000000"
+                      placeholder="••••••"
                       autoFocus
-                      className={`w-full bg-white/5 border text-white placeholder-gray-600 rounded-xl pl-11 pr-4 py-3.5 text-sm outline-none tracking-widest text-center transition-all duration-300 ${
-                        resetErrors.otpCode
-                          ? 'border-red-500/50 focus:border-red-500/70'
-                          : 'border-white/10 focus:border-violet-500/60 focus:bg-white/[0.07]'
+                      className={`input pl-10 tracking-widest text-center font-mono text-base ${
+                        resetErrors.otpCode ? 'border-rose-500/60 focus:border-rose-500' : ''
                       }`}
                     />
                   </div>
                   {resetErrors.otpCode?.message && resetErrors.otpCode.type === 'pattern' && (
-                    <p className="mt-1.5 text-red-400 text-xs">{resetErrors.otpCode.message}</p>
+                    <p className="mt-1 text-rose-400 text-xs">{resetErrors.otpCode.message}</p>
                   )}
                 </div>
 
                 {/* New Password */}
                 <div>
-                  <label className="block text-gray-400 text-xs font-medium uppercase tracking-wider mb-2">
+                  <label className="label">
                     New Password
                   </label>
                   <div className="relative">
-                    <Lock size={15} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none" />
+                    <Lock size={15} className="absolute left-3.5 top-3 text-slate-500 pointer-events-none" />
                     <input
                       type={showPw ? 'text' : 'password'}
                       {...registerReset('newPassword', {
                         required: 'Password is required',
-                        minLength: { value: 8, message: 'Password must be at least 8 characters' }
+                        validate: {
+                          minLength: (v) => v.length >= 8 || 'Password must be at least 8 characters',
+                          uppercase: (v) => /[A-Z]/.test(v) || 'Must contain at least one uppercase letter (A-Z)',
+                          lowercase: (v) => /[a-z]/.test(v) || 'Must contain at least one lowercase letter (a-z)',
+                          number: (v) => /[0-9]/.test(v) || 'Must contain at least one number (0-9)',
+                          special: (v) => /[^a-zA-Z0-9\s]/.test(v) || 'Must contain at least one special character (!@#$%...)',
+                        },
                       })}
-                      placeholder="••••••••"
-                      className={`w-full bg-white/5 border text-white placeholder-gray-600 rounded-xl pl-11 pr-4 py-3.5 text-sm outline-none transition-all duration-300 ${
-                        resetErrors.newPassword
-                          ? 'border-red-500/50 focus:border-red-500/70'
-                          : 'border-white/10 focus:border-violet-500/60 focus:bg-white/[0.07]'
+                      placeholder="Minimum 8 characters"
+                      className={`input pl-10 pr-10 ${
+                        resetErrors.newPassword ? 'border-rose-500/60 focus:border-rose-500' : ''
                       }`}
                     />
+                    <button
+                      type="button"
+                      onClick={() => setShowPw(!showPw)}
+                      className="absolute right-3.5 top-3 text-slate-400 hover:text-white transition-colors"
+                    >
+                      {showPw ? <EyeOff size={15} /> : <Eye size={15} />}
+                    </button>
                   </div>
+
+                  {/* Password requirements checklist */}
+                  {newPasswordValue && (
+                    <div className="mt-2 p-2.5 rounded-xl bg-slate-900/60 border border-slate-800 space-y-1.5">
+                      <div className="text-[11px] text-slate-400 font-medium mb-1">
+                        Password Requirements
+                      </div>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-1">
+                        {pwChecks.map((c, i) => (
+                          <div key={i} className="flex items-center gap-1.5">
+                            {c.pass
+                              ? <CheckCircle size={11} className="text-emerald-400 flex-shrink-0" />
+                              : <XCircle    size={11} className="text-slate-600 flex-shrink-0" />
+                            }
+                            <span className={`text-[11px] ${c.pass ? 'text-emerald-400 font-medium' : 'text-slate-500'}`}>
+                              {c.label}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
                   {resetErrors.newPassword && (
-                    <p className="mt-1.5 text-red-400 text-xs">{resetErrors.newPassword.message}</p>
+                    <p className="mt-1 text-rose-400 text-xs">{resetErrors.newPassword.message}</p>
                   )}
                 </div>
 
                 {/* Confirm Password */}
                 <div>
-                  <label className="block text-gray-400 text-xs font-medium uppercase tracking-wider mb-2">
-                    Confirm Password
+                  <label className="label">
+                    Confirm New Password
                   </label>
                   <div className="relative">
-                    <Lock size={15} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none" />
+                    <Lock size={15} className="absolute left-3.5 top-3 text-slate-500 pointer-events-none" />
                     <input
                       type={showConfirm ? 'text' : 'password'}
                       {...registerReset('confirmPassword', {
                         required: 'Please confirm your password',
                         validate: val => val === newPasswordValue || 'Passwords do not match'
                       })}
-                      placeholder="••••••••"
-                      className={`w-full bg-white/5 border text-white placeholder-gray-600 rounded-xl pl-11 pr-4 py-3.5 text-sm outline-none transition-all duration-300 ${
-                        resetErrors.confirmPassword
-                          ? 'border-red-500/50 focus:border-red-500/70'
-                          : 'border-white/10 focus:border-violet-500/60 focus:bg-white/[0.07]'
+                      placeholder="Re-enter new password"
+                      className={`input pl-10 pr-10 ${
+                        resetErrors.confirmPassword ? 'border-rose-500/60 focus:border-rose-500' : ''
                       }`}
                     />
+                    <button
+                      type="button"
+                      onClick={() => setShowConfirm(!showConfirm)}
+                      className="absolute right-3.5 top-3 text-slate-400 hover:text-white transition-colors"
+                    >
+                      {showConfirm ? <EyeOff size={15} /> : <Eye size={15} />}
+                    </button>
                   </div>
                   {resetErrors.confirmPassword && (
-                    <p className="mt-1.5 text-red-400 text-xs">{resetErrors.confirmPassword.message}</p>
+                    <p className="mt-1 text-rose-400 text-xs">{resetErrors.confirmPassword.message}</p>
                   )}
                 </div>
 
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full relative py-3.5 rounded-xl font-bold text-white text-sm overflow-hidden group disabled:opacity-70 disabled:cursor-not-allowed mt-4"
+                  className="btn-primary w-full py-3 justify-center text-sm mt-2"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-violet-600 to-indigo-600 group-hover:from-violet-500 group-hover:to-indigo-500 transition-all duration-300" />
-                  <span className="relative flex items-center justify-center gap-2">
-                    {loading ? 'Resetting Password…' : 'Reset Password'}
-                    {!loading && <CheckCircle size={15} />}
-                  </span>
+                  {loading ? (
+                    <>
+                      <RefreshCw className="w-4 h-4 animate-spin" />
+                      <span>Resetting Password...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>Reset Password & Update Vault</span>
+                      <CheckCircle size={15} />
+                    </>
+                  )}
                 </button>
 
                 <button
                   type="button"
                   onClick={() => setStep('REQUEST')}
-                  className="w-full py-3.5 rounded-xl border border-white/10 bg-transparent hover:bg-white/5 text-gray-300 text-sm font-medium transition-all duration-300 mt-2"
+                  className="btn-secondary w-full py-2.5 justify-center text-xs mt-1"
                 >
-                  Request New OTP Code
+                  Request a New OTP Code
                 </button>
               </form>
             </div>
@@ -276,10 +355,10 @@ export default function ForgotPasswordPage() {
 
         </div>
 
-        {/* Support details */}
-        <div className="flex items-center justify-center gap-2 mt-5 text-gray-600 text-xs">
-          <Shield size={12} />
-          <span>Secure password reset process</span>
+        {/* Security badge */}
+        <div className="flex items-center justify-center gap-2 mt-5 text-slate-500 text-xs">
+          <Shield size={13} className="text-emerald-500" />
+          <span>256-Bit Encrypted Credential Reset</span>
         </div>
 
       </div>

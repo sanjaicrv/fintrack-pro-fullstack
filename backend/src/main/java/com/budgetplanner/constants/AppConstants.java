@@ -20,6 +20,8 @@ public final class AppConstants {
     public static final String GOAL_BASE = API_VERSION + "/goals";
     public static final String ANALYTICS_BASE = API_VERSION + "/analytics";
     public static final String USER_BASE = API_VERSION + "/users";
+    public static final String CATEGORY_BUDGET_BASE = API_VERSION + "/category-budgets";
+    public static final String BANK_SYNC_BASE = API_VERSION + "/bank-sync";
 
     // Pagination defaults
     public static final int DEFAULT_PAGE_NUMBER = 0;

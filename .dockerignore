@@ -1,0 +1,20 @@
+# Build artifacts
+**/target/
+**/dist/
+**/build/
+
+# Dependency directories
+**/node_modules/
+**/.pnpm-store/
+
+# Version control & IDE
+**/.git/
+**/.gitignore/
+**/.idea/
+**/.vscode/
+**/*.iml
+
+# Logs and scratch files
+**/*.log
+**/scratch/
+**/qa_api_results.json

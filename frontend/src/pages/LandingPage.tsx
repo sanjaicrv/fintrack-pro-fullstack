@@ -4,7 +4,10 @@ import {
   ChevronDown, ChevronUp, Star, Menu, X, ArrowRight,
   Play, Check, Twitter, Github, Linkedin, Instagram,
   Zap, Users, Activity, Award, DollarSign, PieChart,
-  Lock, Globe, Smartphone, Bell
+  Lock, Globe, Smartphone, Bell,
+  Upload, FileSpreadsheet, FileText, Layers, AlertTriangle,
+  ShieldCheck, Sparkles, RefreshCw, Calendar, ArrowUpRight,
+  CheckCircle2, Sliders, Database, CreditCard
 } from "lucide-react";
 
 // ─── Animated Counter ──────────────────────────────────────────────────────
@@ -184,13 +187,16 @@ function Hero() {
               {/* Stats row */}
               <div className="grid grid-cols-4 gap-3">
                 {[
-                  { label: "Total Income", value: "₹10,30,000", color: "text-emerald-400", bg: "bg-emerald-500/10", icon: TrendingUp },
-                  { label: "Total Expenses", value: "₹1,000", color: "text-red-400", bg: "bg-red-500/10", icon: Wallet },
-                  { label: "Net Savings", value: "₹10,29,000", color: "text-violet-400", bg: "bg-violet-500/10", icon: Target },
-                  { label: "Savings Rate", value: "99.9%", color: "text-blue-400", bg: "bg-blue-500/10", icon: BarChart3 },
+                  { label: "Total Inflow", value: "₹85,000", color: "text-emerald-400", bg: "bg-emerald-500/10", icon: TrendingUp },
+                  { label: "Total Outflow", value: "₹34,200", color: "text-rose-400", bg: "bg-rose-500/10", icon: Wallet },
+                  { label: "Net Savings", value: "₹50,800", color: "text-violet-400", bg: "bg-violet-500/10", icon: Target },
+                  { label: "Safe-to-Spend", value: "₹1,693/day", color: "text-amber-400", bg: "bg-amber-500/10", icon: Sparkles },
                 ].map((stat) => (
                   <div key={stat.label} className={`${stat.bg} border border-white/5 rounded-xl p-3`}>
-                    <p className="text-gray-500 text-xs mb-1">{stat.label}</p>
+                    <div className="flex items-center justify-between mb-1">
+                      <p className="text-gray-500 text-xs">{stat.label}</p>
+                      <stat.icon size={13} className={stat.color} />
+                    </div>
                     <p className={`${stat.color} font-bold text-sm`}>{stat.value}</p>
                   </div>
                 ))}
@@ -274,42 +280,259 @@ function Stats() {
 // ─── Features ──────────────────────────────────────────────────────────────
 function Features() {
   const features = [
-    { icon: Activity, title: "Expense Tracking", desc: "Automatically categorize and track every expense in real-time with beautiful visual breakdowns.", color: "from-indigo-500 to-blue-600", glow: "indigo" },
-    { icon: Target, title: "Goal Management", desc: "Set, track, and achieve financial goals with milestone tracking and progress celebrations.", color: "from-emerald-500 to-teal-600", glow: "emerald" },
-    { icon: BarChart3, title: "Financial Analytics", desc: "Deep insights and trend analysis with interactive charts that make data easy to understand.", color: "from-amber-500 to-orange-600", glow: "amber" },
-    { icon: TrendingUp, title: "Income Tracking", desc: "Monitor multiple income sources, recurring payments, and salary growth over time.", color: "from-pink-500 to-rose-600", glow: "pink" },
-    { icon: Cloud, title: "Secure Cloud Sync", desc: "Bank-level encryption with automatic backup and sync across all your devices seamlessly.", color: "from-cyan-500 to-sky-600", glow: "cyan" },
+    {
+      badge: "EASY IMPORT",
+      badgeColor: "text-emerald-400 border-emerald-500/30 bg-emerald-500/10",
+      icon: Upload,
+      title: "Bank Statement Import",
+      desc: "Upload your bank statement and we'll automatically add your income and expenses. No typing by hand, and duplicate transactions are never added twice.",
+      color: "from-emerald-500 to-teal-600",
+      highlights: ["Upload statement in seconds", "Zero manual typing needed", "Never adds duplicate charges"]
+    },
+    {
+      badge: "DAILY BUDGET",
+      badgeColor: "text-violet-400 border-violet-500/30 bg-violet-500/10",
+      icon: Wallet,
+      title: "Daily Spending Limit",
+      desc: "Know exactly how much you can safely spend today without running out of money before your next paycheck. Updates automatically every morning.",
+      color: "from-violet-500 to-indigo-600",
+      highlights: ["Tells you your safe daily limit", "Updates every morning", "Avoids end-of-month panic"]
+    },
+    {
+      badge: "BUDGET LIMITS",
+      badgeColor: "text-amber-400 border-amber-500/30 bg-amber-500/10",
+      icon: Layers,
+      title: "Category Budgets",
+      desc: "Set spending caps for Food, Travel, Shopping, and Bills. Clear visual progress bars show your spending, with friendly warnings before you go over.",
+      color: "from-amber-500 to-orange-600",
+      highlights: ["Limits for Food, Travel & Bills", "Warning alert at 80% spent", "Clean color progress bars"]
+    },
+    {
+      badge: "REPORTS",
+      badgeColor: "text-blue-400 border-blue-500/30 bg-blue-500/10",
+      icon: FileSpreadsheet,
+      title: "Monthly PDF & Excel Reports",
+      desc: "Download clean, official monthly financial statements with one click in PDF or Excel. Ready for tax filing, accountant reviews, or personal records.",
+      color: "from-blue-500 to-cyan-600",
+      highlights: ["1-click PDF and Excel download", "Official summary & full list", "Ready for taxes and records"]
+    },
+    {
+      badge: "HISTORY",
+      badgeColor: "text-purple-400 border-purple-500/30 bg-purple-500/10",
+      icon: Calendar,
+      title: "Past Months History",
+      desc: "Easily switch back to any past month from the last 2 years. Compare your spending, see if you saved more than last month, and track your progress.",
+      color: "from-purple-500 to-pink-600",
+      highlights: ["Look back up to 2 years", "Compare with previous month", "See your savings improve"]
+    },
+    {
+      badge: "EASY CHARTS",
+      badgeColor: "text-cyan-400 border-cyan-500/30 bg-cyan-500/10",
+      icon: BarChart3,
+      title: "Visual Spending Charts",
+      desc: "See where your money comes from and where it goes with colorful, simple charts. Spot your biggest spending habits at a single glance.",
+      color: "from-cyan-500 to-blue-600",
+      highlights: ["Simple income vs expense chart", "Category pie breakdown", "Spot your biggest expenses"]
+    },
+    {
+      badge: "SAVINGS",
+      badgeColor: "text-pink-400 border-pink-500/30 bg-pink-500/10",
+      icon: Target,
+      title: "Savings Goals",
+      desc: "Set targets for an emergency fund, vacation, or new gadget. Add savings over time and watch your progress bar fill up until you reach 100%.",
+      color: "from-pink-500 to-rose-600",
+      highlights: ["Set target amounts & dates", "Live progress tracking", "Stay motivated to save"]
+    },
+    {
+      badge: "EARLY ALERTS",
+      badgeColor: "text-rose-400 border-rose-500/30 bg-rose-500/10",
+      icon: AlertTriangle,
+      title: "Overspending Alerts",
+      desc: "Get an immediate alert when you've used 80% of your monthly budget or go over limit, so you can make quick changes before running out of cash.",
+      color: "from-rose-500 to-red-600",
+      highlights: ["Early warning banners", "Change your budget anytime", "No surprise overdrafts"]
+    },
+    {
+      badge: "PRIVACY",
+      badgeColor: "text-emerald-400 border-emerald-500/30 bg-emerald-500/10",
+      icon: ShieldCheck,
+      title: "100% Safe & Private",
+      desc: "Sign in quickly with Google. Your financial information is securely locked with bank-level protection and is never sold or shared with anyone.",
+      color: "from-emerald-600 to-green-600",
+      highlights: ["Quick 1-click Google sign-in", "Bank-level protection", "Your data stays 100% private"]
+    },
+  ];
+
+  const workflowSteps = [
+    {
+      step: "01",
+      title: "Add Your Money In & Out",
+      desc: "Upload your bank statement file or type your expenses in seconds. Incomes and spending are organized automatically without manual headache.",
+      badge: "Fast & Automatic",
+      icon: Upload,
+      preview: [
+        { name: "Swiggy Food Order", type: "EXPENSE", cat: "Food", amt: "-₹480", color: "text-rose-400" },
+        { name: "Salary / Client Payment", type: "INCOME", cat: "Income", amt: "+₹85,000", color: "text-emerald-400" },
+        { name: "Uber Ride", type: "EXPENSE", cat: "Travel", amt: "-₹240", color: "text-rose-400" },
+      ]
+    },
+    {
+      step: "02",
+      title: "See Your Daily Spending Limit",
+      desc: "Check your dashboard every day to see how much you can spend today. Helpful alerts warn you before you go over your budget limits.",
+      badge: "Stress-Free Days",
+      icon: Wallet,
+      preview: [
+        { name: "Safe to Spend Today", val: "₹1,693/day", sub: "18 days left this month", color: "text-amber-400" },
+        { name: "Food Budget (₹8,000)", val: "62% spent", sub: "₹3,040 left to spend", color: "text-emerald-400" },
+      ]
+    },
+    {
+      step: "03",
+      title: "Save More & Download Reports",
+      desc: "Track your savings goals step-by-step and download clean monthly statements in PDF or Excel whenever you need them.",
+      badge: "Real Savings",
+      icon: FileSpreadsheet,
+      preview: [
+        { name: "Emergency Fund Goal", val: "78% Complete", sub: "₹39,000 of ₹50,000 saved", color: "text-emerald-400" },
+        { name: "Monthly Statement", val: "PDF & Excel Ready", sub: "Download with 1 click", color: "text-blue-400" },
+      ]
+    },
   ];
 
   return (
     <section id="features" className="relative py-32 bg-[#050510]">
       <FloatingOrbs />
       <div className="relative max-w-7xl mx-auto px-6">
+        {/* Section Header */}
         <div className="text-center mb-20">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-violet-500/30 bg-violet-500/10 text-violet-300 text-xs font-semibold mb-5">
-            <Zap size={11} className="fill-current" /> Everything You Need
+            <Zap size={13} className="fill-current text-violet-400" />
+            <span>SIMPLE & POWERFUL</span>
           </div>
-          <h2 className="text-4xl md:text-6xl font-black text-white mb-5 tracking-tight">
-            Powerful Features for
-            <br /><span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">Smart Finance</span>
+          <h2 className="text-4xl md:text-6xl font-black text-white mb-5 tracking-tight leading-tight">
+            Everything You Need to
+            <br />
+            <span className="bg-gradient-to-r from-violet-400 via-indigo-300 to-purple-400 bg-clip-text text-transparent">
+              Take Control of Your Money
+            </span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Every tool you need to take control of your financial life, beautifully crafted and intelligently connected.
+          <p className="text-gray-400 text-lg max-w-3xl mx-auto leading-relaxed">
+            No complicated finance terms. No spreadsheet headaches. Just simple, smart tools to help you save more, spend wisely, and stress less.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {features.map((f, i) => (
-            <div key={f.title} className="group relative rounded-2xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] p-8 hover:border-violet-500/20 transition-all duration-500 overflow-hidden cursor-pointer">
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-violet-900/10 to-transparent" />
-              <div className={`inline-flex p-3.5 rounded-xl bg-gradient-to-br ${f.color} mb-5 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                <f.icon size={22} className="text-white" />
+        {/* 3x3 Customer-Friendly Features Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
+          {features.map((f) => (
+            <div
+              key={f.title}
+              className="group relative rounded-2xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] p-7 hover:border-violet-500/30 transition-all duration-500 flex flex-col justify-between overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-violet-900/20"
+            >
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-violet-900/10 via-transparent to-transparent pointer-events-none" />
+
+              <div>
+                {/* Header row: Badge + Icon */}
+                <div className="flex items-center justify-between gap-3 mb-5">
+                  <span className={`text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-1 rounded-full border ${f.badgeColor}`}>
+                    {f.badge}
+                  </span>
+                  <div className={`p-3 rounded-xl bg-gradient-to-br ${f.color} shadow-md group-hover:scale-110 transition-transform duration-300 flex items-center justify-center text-white`}>
+                    <f.icon size={20} />
+                  </div>
+                </div>
+
+                {/* Title & Desc */}
+                <h3 className="text-white font-bold text-lg mb-2.5 group-hover:text-violet-200 transition-colors">
+                  {f.title}
+                </h3>
+                <p className="text-gray-400 text-sm leading-relaxed mb-5">
+                  {f.desc}
+                </p>
               </div>
-              <h3 className="text-white font-bold text-lg mb-3 group-hover:text-violet-100 transition-colors">{f.title}</h3>
-              <p className="text-gray-500 text-sm leading-relaxed">{f.desc}</p>
+
+              {/* Technical highlight pills */}
+              <div className="space-y-1.5 pt-4 border-t border-white/5">
+                {f.highlights.map((h, idx) => (
+                  <div key={idx} className="flex items-center gap-2 text-xs text-gray-400">
+                    <CheckCircle2 size={13} className="text-violet-400 flex-shrink-0" />
+                    <span className="truncate">{h}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Bottom glowing accent bar */}
               <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-violet-500 to-indigo-500 group-hover:w-full transition-all duration-500 rounded-full" />
             </div>
           ))}
+        </div>
+
+        {/* ── WORKFLOW SPOTLIGHT BANNER: 3 Simple Steps ────────────────── */}
+        <div className="relative rounded-3xl border border-violet-500/20 bg-gradient-to-b from-[#0e0e26] to-[#070716] p-8 md:p-12 overflow-hidden shadow-2xl">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-violet-600/10 rounded-full blur-3xl pointer-events-none" />
+
+          <div className="text-center max-w-2xl mx-auto mb-10">
+            <span className="text-xs font-bold uppercase tracking-widest text-violet-400 mb-2 block">
+              HOW IT WORKS IN 3 SIMPLE STEPS
+            </span>
+            <h3 className="text-2xl md:text-4xl font-extrabold text-white tracking-tight">
+              Taking Control of Your Money is Simple
+            </h3>
+            <p className="text-gray-400 text-sm mt-2">
+              Say goodbye to manual typing and guessing if you can afford to dine out tonight.
+            </p>
+          </div>
+
+          {/* 3 Step Cards */}
+          <div className="grid md:grid-cols-3 gap-6">
+            {workflowSteps.map((w, idx) => (
+              <div
+                key={w.step}
+                className="rounded-2xl border border-white/5 bg-white/[0.02] p-6 hover:bg-white/[0.04] hover:border-violet-500/30 transition-all flex flex-col justify-between"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-3xl font-black text-violet-500/60 font-numeric">{w.step}</span>
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-violet-500/10 text-violet-300 border border-violet-500/20">
+                      {w.badge}
+                    </span>
+                  </div>
+                  <h4 className="text-white font-bold text-base mb-2">{w.title}</h4>
+                  <p className="text-gray-400 text-xs leading-relaxed mb-6">{w.desc}</p>
+                </div>
+
+                {/* Mini Preview Box */}
+                <div className="p-3.5 rounded-xl bg-black/40 border border-white/5 space-y-2">
+                  {w.preview.map((p: any, i: number) => (
+                    <div key={i} className="flex items-center justify-between text-xs">
+                      <div className="truncate mr-2">
+                        <p className="text-gray-300 font-medium truncate">{p.name}</p>
+                        {p.sub && <p className="text-[10px] text-gray-500">{p.sub}</p>}
+                      </div>
+                      <span className={`font-bold font-numeric flex-shrink-0 ${p.color}`}>
+                        {p.amt || p.val}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Quick CTA inside feature showcase */}
+          <div className="mt-10 pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-3 text-gray-300 text-sm text-center sm:text-left">
+              <Sparkles size={18} className="text-amber-400 flex-shrink-0" />
+              <span>Ready to transform how you track, budget, and save money?</span>
+            </div>
+            <a
+              href="/register"
+              className="px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider text-white bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 transition-all shadow-lg shadow-violet-900/40 flex items-center gap-2 flex-shrink-0"
+            >
+              <span>Get Started Free</span>
+              <ArrowRight size={14} />
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -377,12 +600,16 @@ function Testimonials() {
 
 // ─── Pricing ───────────────────────────────────────────────────────────────
 function Pricing() {
-  const plans = [
-    {
-      name: "Starter", price: "Free", period: "forever",
-      features: ["Unlimited transactions ", " Expense & income tracking", "Smart analytics dashboard", "Savings goals management","Monthly financial insights","Secure cloud access"],
-      cta: "Get Started", highlight: false, color: "border-white/10"
-    }
+  const allFeatures = [
+    "Automated Bank Statement CSV Ingestion with Deduplication",
+    "Dynamic Daily Safe-To-Spend Burn Rate Calculator",
+    "Category Spending Envelopes with 80% & Exceeded Alerts",
+    "Official Certified Monthly Audit Reports (PDF & CSV)",
+    "24-Month Period Engine & Historical Time Machine",
+    "Interactive Cashflow Run-Rate & Category Doughnut Analytics",
+    "Savings Goal Deadlines & Milestone Progress Tracking",
+    "Google OAuth2 Single Sign-On & Stateless JWT Security",
+    "Zero Advertisements · Complete Data Privacy"
   ];
 
   return (
@@ -391,46 +618,50 @@ function Pricing() {
       <div className="relative max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-violet-500/30 bg-violet-500/10 text-violet-300 text-xs font-semibold mb-5">
-            <DollarSign size={11} /> Free Forever
+            <DollarSign size={13} /> Free Forever · No Hidden Fees
           </div>
           <h2 className="text-4xl md:text-6xl font-black text-white mb-5 tracking-tight">
-            Plans for <span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">Everyone</span>
+            Enterprise Power, <span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">Zero Cost</span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-xl mx-auto">Manage your money smarter with FinTrack Pro — built for students, professionals, and everyday users.
-</p>
+          <p className="text-gray-400 text-lg max-w-xl mx-auto">
+            All advanced financial features are unlocked for every user. Built for students, engineers, and modern finance enthusiasts.
+          </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          {plans.map((plan) => (
-            <div key={plan.name} className={`relative rounded-2xl border ${plan.color} ${plan.highlight ? "bg-gradient-to-b from-violet-900/30 to-[#080818]" : "bg-white/[0.02]"} p-8 flex flex-col`}>
-              {plan.highlight && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-violet-600 to-indigo-600 rounded-full text-white text-xs font-bold">
-                  Most Popular
-                </div>
-              )}
-              <div className="mb-6">
-                <h3 className="text-white font-bold text-lg mb-2">{plan.name}</h3>
-                <div className="flex items-baseline gap-1">
-                  <span className="text-4xl font-black text-white">{plan.price}</span>
-                  <span className="text-gray-500 text-sm">{plan.period}</span>
-                </div>
-              </div>
-              <ul className="space-y-3 flex-1 mb-8">
-                {plan.features.map(f => (
-                  <li key={f} className="flex items-center gap-2.5 text-gray-400 text-sm">
-                    <Check size={14} className="text-violet-400 flex-shrink-0" />
-                    {f}
-                  </li>
-                ))}
-              </ul>
-              <a href="/register" className={`w-full text-center py-3 rounded-xl font-semibold text-sm transition-all duration-300 ${plan.highlight
-                ? "bg-gradient-to-r from-violet-600 to-indigo-600 text-white hover:from-violet-500 hover:to-indigo-500 shadow-lg shadow-violet-900/40"
-                : "border border-white/10 text-gray-300 hover:border-violet-500/40 hover:text-white hover:bg-white/5"
-              }`}>
-                {plan.cta}
-              </a>
+        <div className="max-w-xl mx-auto">
+          <div className="relative rounded-3xl border border-violet-500/30 bg-gradient-to-b from-violet-950/40 via-[#0c0c24] to-[#070716] p-8 sm:p-10 flex flex-col shadow-2xl shadow-violet-900/30">
+            <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-violet-600 to-indigo-600 rounded-full text-white text-xs font-bold uppercase tracking-wider shadow-md">
+              Full Suite Unlocked
             </div>
-          ))}
+
+            <div className="mb-6 text-center sm:text-left">
+              <h3 className="text-white font-black text-2xl mb-1">FinTrack Pro Complete</h3>
+              <p className="text-gray-400 text-xs">Everything you need to master cashflow, envelopes, and bank statements.</p>
+              <div className="flex items-baseline justify-center sm:justify-start gap-1.5 mt-4">
+                <span className="text-5xl font-black text-white font-numeric">₹0</span>
+                <span className="text-gray-400 text-sm font-semibold">/ lifetime free</span>
+              </div>
+            </div>
+
+            <ul className="space-y-3.5 flex-1 mb-8">
+              {allFeatures.map((f, i) => (
+                <li key={i} className="flex items-center gap-3 text-gray-300 text-sm">
+                  <div className="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0">
+                    <Check size={12} strokeWidth={3} />
+                  </div>
+                  <span>{f}</span>
+                </li>
+              ))}
+            </ul>
+
+            <a
+              href="/register"
+              className="w-full text-center py-4 rounded-2xl font-bold text-sm text-white bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 transition-all shadow-xl shadow-violet-900/50 flex items-center justify-center gap-2"
+            >
+              <span>Get Started Now</span>
+              <ArrowRight size={16} />
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -540,18 +771,55 @@ function Footer() {
             </div>
           </div>
           <div>
-            <h4 className="text-white font-semibold text-sm mb-4">Product</h4>
-            <ul className="space-y-3">
-              {["Features", "Pricing", "Analytics", "Security", "Changelog"].map(l => (
-                <li key={l}><a href="#" className="text-gray-500 hover:text-gray-300 text-sm transition-colors">{l}</a></li>
+            <h4 className="text-white font-bold text-sm mb-4 flex items-center gap-2">
+              <span>Product</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-violet-500"></span>
+            </h4>
+            <ul className="space-y-2.5">
+              {[
+                { label: "Features Overview", href: "#features" },
+                { label: "Bank Statement Sync", href: "#features" },
+                { label: "Safe-to-Spend Pacing", href: "#features" },
+                { label: "Category Envelopes", href: "#features" },
+                { label: "Audit Reports & PDF", href: "#features" },
+                { label: "Pricing & Plans", href: "#pricing" },
+              ].map(item => (
+                <li key={item.label}>
+                  <a
+                    href={item.href}
+                    className="text-slate-300 hover:text-violet-300 text-sm font-medium transition-all duration-200 hover:translate-x-1 inline-flex items-center gap-1.5 group"
+                  >
+                    <span className="text-violet-500/60 group-hover:text-violet-400 text-xs">›</span>
+                    <span>{item.label}</span>
+                  </a>
+                </li>
               ))}
             </ul>
           </div>
+
           <div>
-            <h4 className="text-white font-semibold text-sm mb-4">Company</h4>
-            <ul className="space-y-3">
-              {["About", "Blog", "Careers", "Privacy", "Terms"].map(l => (
-                <li key={l}><a href="#" className="text-gray-500 hover:text-gray-300 text-sm transition-colors">{l}</a></li>
+            <h4 className="text-white font-bold text-sm mb-4 flex items-center gap-2">
+              <span>Platform</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
+            </h4>
+            <ul className="space-y-2.5">
+              {[
+                { label: "Live Dashboard", href: "/dashboard" },
+                { label: "Create Account", href: "/register" },
+                { label: "User Sign In", href: "/login" },
+                { label: "Security & Encryption", href: "#features" },
+                { label: "User Reviews", href: "#testimonials" },
+                { label: "Frequently Asked Questions", href: "#faq" },
+              ].map(item => (
+                <li key={item.label}>
+                  <a
+                    href={item.href}
+                    className="text-slate-300 hover:text-indigo-300 text-sm font-medium transition-all duration-200 hover:translate-x-1 inline-flex items-center gap-1.5 group"
+                  >
+                    <span className="text-indigo-500/60 group-hover:text-indigo-400 text-xs">›</span>
+                    <span>{item.label}</span>
+                  </a>
+                </li>
               ))}
             </ul>
           </div>

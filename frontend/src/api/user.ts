@@ -11,6 +11,9 @@ export const userApi = {
   toggleTheme: () =>
     api.patch<ApiResponse<UserResponse>>('/users/me/theme'),
 
+  updateBudget: (monthlyBudget: number) =>
+    api.put<ApiResponse<UserResponse>>('/users/budget', { monthlyBudget }),
+
   changePassword: (currentPassword: string, newPassword: string, confirmPassword: string) =>
     api.patch<ApiResponse<void>>('/users/me/password', { currentPassword, newPassword, confirmPassword }),
 }

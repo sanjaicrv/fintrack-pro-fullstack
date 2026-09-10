@@ -2,6 +2,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { useAuth } from './context/AuthContext'
 import { ThemeProvider } from './context/ThemeContext'
+import { PeriodProvider } from './context/PeriodContext'
 
 // Layout
 import AppLayout from './components/Layout/AppLayout'
@@ -27,8 +28,8 @@ export default function App() {
 
   return (
     <ThemeProvider>
-
-      <Routes>
+      <PeriodProvider>
+        <Routes>
 
         {/* Default route */}
         <Route
@@ -97,8 +98,8 @@ export default function App() {
           }
         />
 
-      </Routes>
-
+        </Routes>
+      </PeriodProvider>
     </ThemeProvider>
   )
 }
